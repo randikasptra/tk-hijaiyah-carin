@@ -36,6 +36,13 @@ class CreateUsers extends Migration
                 'role'       => 'guru',
                 'created_at' => date('Y-m-d H:i:s')
             ],
+            [
+                'name'       => 'Siswa',
+                'email'      => 'siswa@example.com',
+                'password'   => password_hash('123456', PASSWORD_DEFAULT),
+                'role'       => 'siswa',
+                'created_at' => date('Y-m-d H:i:s')
+            ],
         ]);
     }
 
