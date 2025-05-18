@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\HurufModel; // ✅ Tambahin ini bro
+use App\Models\HurufModel;
+
 
 class Siswa extends BaseController
 {
