@@ -56,3 +56,119 @@ in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
  8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:18:18 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:20:41 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:22:07 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:23:59 --> ErrorException: Cannot declare class App\Controllers\Siswa, because the name is already in use
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Models\HurufModel.php on line 7.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-05-18 13:25:00 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:01 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:15 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:16 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:16 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:16 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+CRITICAL - 2025-05-18 13:25:16 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')
+DEBUG - 2025-05-18 13:26:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-18 13:26:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-18 13:26:32 --> Error: Class "App\Models\HurufModel" not found
+[Method: GET, Route: siswa/mengenal]
+in APPPATH\Controllers\Siswa.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Siswa->mengenal()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Siswa))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('D:\\Laragon\\laragon\\www\\tk-hijaiyah-carin\\public\\index.php')

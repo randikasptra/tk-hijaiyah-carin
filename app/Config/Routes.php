@@ -19,3 +19,7 @@ $routes->get('/siswa', 'Siswa::index');
 
 // 🔧 Optional: Dashboard umum (kalau butuh untuk default redirect)
 $routes->get('/dashboard', 'Dashboard::index');
+
+
+$routes->get('/siswa/mengenal', 'Siswa::mengenal');
+
