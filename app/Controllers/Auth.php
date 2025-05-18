@@ -22,16 +22,29 @@ class Auth extends Controller
         $user = $userModel->where('email', $email)->first();
 
         if ($user && password_verify($password, $user['password'])) {
+            // Simpan data ke session
             $session->set([
-                'user_id' => $user['id'],
-                'user_name' => $user['name'],
-                'user_role' => $user['role'],
-                'logged_in' => true
+                'user_id'    => $user['id'],
+                'user_name'  => $user['name'],
+                'user_email' => $user['email'],
+                'user_role'  => $user['role'],
+                'logged_in'  => true
             ]);
 
             // Redirect berdasarkan role
-            return redirect()->to('/dashboard');
+            switch ($user['role']) {
+                case 'admin':
+                    return redirect()->to('/admin');
+                case 'guru':
+                    return redirect()->to('/guru');
+                case 'siswa':
+                    return redirect()->to('/siswa');
+                default:
+                    $session->setFlashdata('error', 'Role tidak dikenali.');
+                    return redirect()->to('/login');
+            }
         } else {
+            // Gagal login
             $session->setFlashdata('error', 'Email atau password salah');
             return redirect()->to('/login');
         }
