@@ -10,4 +10,4 @@ $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::doLogin');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Dashboard::index');
-
+$routes->get('/siswa', 'Siswa::index');
