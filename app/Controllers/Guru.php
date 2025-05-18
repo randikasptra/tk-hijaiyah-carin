@@ -9,6 +9,6 @@ class Guru extends BaseController
 {
     public function index()
     {
-        //
+        return view('guru/home'); // Buat view ini nanti
     }
 }

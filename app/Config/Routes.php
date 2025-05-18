@@ -11,3 +11,6 @@ $routes->post('/login', 'Auth::doLogin');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/siswa', 'Siswa::index');
+$routes->get('/admin', 'Admin::index');
+$routes->get('/guru', 'Guru::index');
+$routes->get('/siswa', 'Siswa::index');
