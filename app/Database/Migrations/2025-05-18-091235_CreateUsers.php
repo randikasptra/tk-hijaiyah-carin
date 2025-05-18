@@ -19,7 +19,26 @@ class CreateUsers extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('users');
+
+        // INSERT DATA DEFAULT
+        $this->db->table('users')->insertBatch([
+            [
+                'name'       => 'Admin',
+                'email'      => 'admin@example.com',
+                'password'   => password_hash('123456', PASSWORD_DEFAULT),
+                'role'       => 'admin',
+                'created_at' => date('Y-m-d H:i:s')
+            ],
+            [
+                'name'       => 'Guru',
+                'email'      => 'guru@example.com',
+                'password'   => password_hash('123456', PASSWORD_DEFAULT),
+                'role'       => 'guru',
+                'created_at' => date('Y-m-d H:i:s')
+            ],
+        ]);
     }
+
 
     public function down()
     {

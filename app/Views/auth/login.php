@@ -1,26 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <h2>Login</h2>
+<body class="bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-100 min-h-screen flex items-center justify-center">
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <p style="color:red"><?= session()->getFlashdata('error') ?></p>
-    <?php endif; ?>
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+        <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">Selamat Datang 👋</h2>
 
-    <form method="post" action="<?= base_url('/login') ?>">
-        <label>Email:</label>
-        <input type="email" name="email" required><br><br>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+        <?php endif; ?>
 
-        <label>Password:</label>
-        <input type="password" name="password" required><br><br>
+        <form method="post" action="<?= base_url('/login') ?>" class="space-y-4">
+            <div>
+                <label class="block mb-1 font-medium text-gray-700">Email</label>
+                <input type="email" name="email" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none" />
+            </div>
 
-        <button type="submit">Login</button>
-    </form>
+            <div>
+                <label class="block mb-1 font-medium text-gray-700">Password</label>
+                <input type="password" name="password" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none" />
+            </div>
+
+            <button type="submit"
+                class="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg font-semibold transition duration-200">
+                Login
+            </button>
+        </form>
+    </div>
+
 </body>
+
+</html>
 
 </html>
