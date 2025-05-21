@@ -20,9 +20,8 @@ $routes->get('/guru', 'Guru::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
 
-$routes->get('/siswa/mengenal', 'Siswa::mengenal');
-
 $routes->get('/siswa', 'Siswa::index'); // dashboard siswa
 $routes->get('/siswa/home', 'Siswa::home'); // halaman awal belajar (setelah klik Mulai)
 $routes->get('/siswa/mengenal', 'Siswa::mengenal'); // halaman belajar huruf hijaiyah
+$routes->get('/siswa/menghafal', 'Siswa::menghafal'); // halaman belajar huruf hijaiyah
 

@@ -1,0 +1,42 @@
+# Composer dependencies
+/vendor
+
+# Environment files
+.env
+.env.*
+
+# CI4 writable directory
+/writable/cache/*
+/writable/debugbar/*
+/writable/logs/*
+/writable/session/*
+/writable/uploads/*
+
+# Node modules (kalau lo pakai npm/tailwind)
+node_modules/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# OS related
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# PHPStorm
+/.phpstorm.meta.php
+
+# PHPUnit
+phpunit.xml
+phpunit.result.cache
+tests/_support/_generated
+
+# Build files (opsional)
+public/build/
