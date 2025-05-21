@@ -47,7 +47,7 @@
                         Menghafal Hijaiyah
                     </a>
 
-                    <a href="#"
+                    <a href="<?= base_url('/siswa/game') ?>"
                         class="bg-yellow-300 hover:bg-yellow-400 text-black font-bold py-4 px-10 md:py-5 md:px-14 rounded-full border-4 border-orange-400 text-2xl shadow-lg hover:scale-105 transform transition duration-200">
                         Game
                     </a>

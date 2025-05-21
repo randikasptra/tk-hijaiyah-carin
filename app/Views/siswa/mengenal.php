@@ -17,7 +17,8 @@
 <body>
     <div class="w-full h-[100vh] bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
         <div class="min-h-screen px-4 pt-6 pb-20 relative">
-            <!-- Judul -->
+        
+                <!-- Judul -->
             <h1 class="text-2xl md:text-4xl font-bold text-[#2d2f6f] mb-6 text-center">
                 Mengenal Huruf Hijaiyah
             </h1>
