@@ -22,7 +22,7 @@
         <div class="grid grid-cols-4 md:grid-cols-6 gap-4 max-w-6xl">
             <?php foreach ($huruf as $h): ?>
                 <div class="bg-white/70 rounded-xl p-4 shadow-md hover:shadow-xl transition">
-                    <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-full h-24 object-contain mx-auto">
+                    <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-12 h-12 object-contain mx-auto">
                     <p class="text-center mt-2 font-bold text-lg text-purple-700"><?= $h['nama'] ?></p>
                 </div>
             <?php endforeach; ?>
