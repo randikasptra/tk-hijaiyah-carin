@@ -15,23 +15,35 @@
 </head>
 
 <body>
-    
-    <div class="min-h-screen p-6 flex flex-col items-center">
-        <h1 class="text-3xl font-bold text-blue-800 mb-6">Mengenal Huruf Hijaiyah</h1>
+    <div class="w-full h-[100dvh] bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+        <div class="min-h-screen px-4 pt-6 pb-20 relative">
+            <!-- Judul -->
+            <h1 class="text-2xl md:text-4xl font-bold text-[#2d2f6f] mb-6 text-center">
+                Mengenal Huruf Hijaiyah
+            </h1>
 
-        <div class="grid grid-cols-4 md:grid-cols-6 gap-4 max-w-6xl">
-            <?php foreach ($huruf as $h): ?>
-                <div class="bg-white/70 rounded-xl p-4 shadow-md hover:shadow-xl transition">
-                    <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-12 h-12 object-contain mx-auto">
-                    <p class="text-center mt-2 font-bold text-lg text-purple-700"><?= $h['nama'] ?></p>
-                </div>
-            <?php endforeach; ?>
+            <!-- Grid Huruf -->
+            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 max-w-7xl mx-auto">
+                <?php foreach ($huruf as $h): ?>
+                    <div class="bg-white/70 rounded-xl p-4 shadow-md hover:shadow-xl transition">
+                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-12 h-12 object-contain mx-auto">
+                        <p class="text-center mt-2 font-bold text-md md:text-lg text-purple-700"><?= $h['nama'] ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tombol Kembali -->
+            <div class="text-center mt-10">
+                <a href="<?= base_url('/siswa') ?>" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full transition-all">
+                    Kembali
+                </a>
+            </div>
+
+            <!-- Dekorasi Gambar Anak-Anak Duduk -->
+            <img src="<?= base_url('assets/images/dekorasi-anak.png') ?>" alt="Dekorasi"
+                class="absolute bottom-0 right-0 w-40 sm:w-52 md:w-64 lg:w-72 pointer-events-none select-none">
         </div>
-
-        <a href="<?= base_url('/siswa') ?>" class="mt-8 inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full">Kembali</a>
     </div>
-
-
 </body>
 
 </html>
