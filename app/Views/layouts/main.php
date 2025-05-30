@@ -18,9 +18,10 @@
 
     <!-- 🎵 Backsound -->
     <audio id="backsound" autoplay loop>
-        <source src="<?= base_url('sound/Backsoundd.mp3') ?>" type="audio/mpeg">
+        <source src="<?= base_url('sound/' . ($backsound ?? 'Backsoundd.mp3')) ?>" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
 
     <!-- 🔊 Kontrol Volume -->
     <div class="fixed bottom-4 left-4 bg-white/70 p-3 rounded-xl shadow-xl flex items-center gap-3 z-50">
