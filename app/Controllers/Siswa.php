@@ -21,6 +21,10 @@ class Siswa extends BaseController
     {
         return view('siswa/menghafal');
     }
+    public function game()
+    {
+        return view('siswa/game');
+    }
 
     // Halaman mengenal huruf hijaiyah
     public function mengenal()
