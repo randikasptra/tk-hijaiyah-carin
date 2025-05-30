@@ -95,15 +95,21 @@
                 Mengenal Huruf Hijaiyah
             </h1>
 
-            <!-- Grid Huruf (RTL dari kanan ke kiri + transparan blur modern) -->
-            <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-3 p-4 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full">
+            <!-- Grid Huruf dengan padding kanan agar tidak tertutup gambar -->
+            <div
+                class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]">
                 <?php foreach ($huruf as $h): ?>
-                    <div class="card bg-white rounded-xl p-3 shadow text-center cursor-pointer hover:ring-2 hover:ring-purple-400">
-                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-16 h-16 object-contain mx-auto mb-2">
-                        <p class="text-purple-800 font-bold text-lg"><?= $h['nama'] ?></p>
+                    <div class="card bg-white rounded-xl p-4 shadow text-center">
+                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>"
+                            class="w-16 h-16 object-contain mx-auto mb-3" />
+                        <p><?= $h['nama'] ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <!-- Dekorasi Anak pindah sedikit ke atas dan diberi z-index kecil supaya tidak nutup -->
+            <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
+                class="absolute bottom-10 right-4 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-0" />
 
             <!-- Tombol Kembali dengan Icon -->
             <div class="text-center mt-4">
@@ -117,9 +123,10 @@
             </div>
 
             <!-- Dekorasi Anak -->
-            <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
-                class="absolute bottom-0 right-0 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-20">
         </div>
+
+
+
     </div>
 </body>
 

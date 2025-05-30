@@ -6,8 +6,11 @@ use CodeIgniter\Database\Seeder;
 
 class HurufSeeder extends Seeder
 {
+
     public function run()
     {
+
+        $this->db->table('huruf_hijaiyah')->truncate();
         $data = [
             ['nama' => 'Alif', 'gambar' => 'assets/img/1.Alif.png'],
             ['nama' => 'Ba', 'gambar' => 'assets/img/2.Ba.png'],
@@ -39,9 +42,9 @@ class HurufSeeder extends Seeder
             ['nama' => 'Ya', 'gambar' => 'assets/img/28.Ya.png'],
         ];
 
-        foreach ($data as $item) {
-            echo "Seeding: {$item['nama']}\n";
+        foreach ($data as $index => $item) {
             $this->db->table('huruf_hijaiyah')->insert($item);
         }
+        echo count($data) . " data berhasil dimasukkan.\n";
     }
 }
