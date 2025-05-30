@@ -96,16 +96,15 @@
             </h1>
 
             <!-- Grid Huruf dengan padding kanan agar tidak tertutup gambar -->
-            <div
-                class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]">
+            <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]" style="direction: rtl;">
                 <?php foreach ($huruf as $h): ?>
-                    <div class="card bg-white rounded-xl p-4 shadow text-center">
-                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>"
-                            class="w-16 h-16 object-contain mx-auto mb-3" />
+                    <div class="card bg-white rounded-xl p-4 shadow text-center" style="direction: ltr;">
+                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-16 h-16 object-contain mx-auto mb-3" />
                         <p><?= $h['nama'] ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
+
 
             <!-- Dekorasi Anak pindah sedikit ke atas dan diberi z-index kecil supaya tidak nutup -->
             <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
