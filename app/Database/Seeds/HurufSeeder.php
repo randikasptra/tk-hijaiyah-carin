@@ -35,10 +35,13 @@ class HurufSeeder extends Seeder
             ['nama' => 'Mim', 'gambar' => 'assets/img/24.Mim.png'],
             ['nama' => 'Nun', 'gambar' => 'assets/img/25.Nun.png'],
             ['nama' => 'Wawu', 'gambar' => 'assets/img/26.Wau.png'],
-            ['nama' => 'Ha', 'gambar' => 'assets/img/29.Hamzah.png'],
-            ['nama' => 'Ya', 'gambar' => 'assets/img/30.Ya.png'],
+            ['nama' => 'Hamzah', 'gambar' => 'assets/img/27.Hamzah.png'],
+            ['nama' => 'Ya', 'gambar' => 'assets/img/28.Ya.png'],
         ];
 
-        $this->db->table('huruf_hijaiyah')->insertBatch($data);
+        foreach ($data as $item) {
+            echo "Seeding: {$item['nama']}\n";
+            $this->db->table('huruf_hijaiyah')->insert($item);
+        }
     }
 }
