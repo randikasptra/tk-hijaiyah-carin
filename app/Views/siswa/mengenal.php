@@ -1,151 +1,116 @@
-<!DOCTYPE html>
-<html lang="id">
+<?= $this->extend('layouts/main') ?>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Mengenal Huruf Hijaiyah</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Heroicons -->
-    <script src="https://unpkg.com/@heroicons/vue@2.0.18/20/solid/index.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-image: url("<?= base_url('assets/images/bg-siswa.png') ?>");
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
+<?= $this->section('content') ?>
+
+<style>
+    body {
+        font-family: 'Fredoka', sans-serif;
+        background-image: url("<?= base_url('assets/images/bg-siswa.png') ?>");
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+    }
+
+    .card {
+        animation: playfulBounce 2.5s ease-in-out infinite;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes playfulBounce {
+        0%, 100% {
+            transform: translateY(0) rotate(0);
         }
-
-        .card {
-            animation: playfulBounce 2.5s ease-in-out infinite;
-            transition: all 0.3s ease-in-out;
+        25% {
+            transform: translateY(-4px) rotate(2deg);
         }
-
-        .card:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        50% {
+            transform: translateY(0) rotate(-2deg);
         }
-
-        @keyframes playfulBounce {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0);
-            }
-
-            25% {
-                transform: translateY(-4px) rotate(2deg);
-            }
-
-            50% {
-                transform: translateY(0) rotate(-2deg);
-            }
-
-            75% {
-                transform: translateY(-2px) rotate(1deg);
-            }
+        75% {
+            transform: translateY(-2px) rotate(1deg);
         }
+    }
 
-        @keyframes floatBubble {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: translateY(-50vh) translateX(20px);
-                opacity: 0.5;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(-20px);
-                opacity: 0;
-            }
+    @keyframes floatBubble {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.7;
         }
-
-        .bubble {
-            position: absolute;
-            bottom: -50px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 9999px;
-            animation: floatBubble linear infinite;
-            z-index: 0;
+        50% {
+            transform: translateY(-50vh) translateX(20px);
+            opacity: 0.5;
         }
-    </style>
-</head>
+        100% {
+            transform: translateY(-100vh) translateX(-20px);
+            opacity: 0;
+        }
+    }
 
-<body>
-    <!-- BUBBLES -->
-    <?php for ($i = 0; $i < 30; $i++): ?>
-        <div class="bubble" style="
-            left: <?= rand(0, 100) ?>vw;
-            width: <?= rand(40, 80) ?>px;
-            height: <?= rand(40, 80) ?>px;
-            animation-duration: <?= rand(12, 28) ?>s;
-            animation-delay: <?= rand(0, 10) ?>s;
-        "></div>
-    <?php endfor; ?>
+    .bubble {
+        position: absolute;
+        bottom: -50px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 9999px;
+        animation: floatBubble linear infinite;
+        z-index: 0;
+    }
+</style>
 
-    <div class="w-full h-screen bg-cover bg-center relative z-10" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
-        <div class="flex flex-col justify-between h-full px-4 pt-4 pb-4 relative">
+<?php for ($i = 0; $i < 30; $i++): ?>
+    <div class="bubble" style="
+        left: <?= rand(0, 100) ?>vw;
+        width: <?= rand(40, 80) ?>px;
+        height: <?= rand(40, 80) ?>px;
+        animation-duration: <?= rand(12, 28) ?>s;
+        animation-delay: <?= rand(0, 10) ?>s;
+    "></div>
+<?php endfor; ?>
 
-            <!-- Judul -->
-            <h1 class="text-3xl md:text-4xl font-extrabold text-center text-purple-800 drop-shadow mb-4">
-                Mengenal Huruf Hijaiyah
-            </h1>
+<div class="w-full h-screen bg-cover bg-center relative z-10" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+    <div class="flex flex-col justify-between h-full px-4 pt-4 pb-4 relative">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center text-purple-800 drop-shadow mb-4">
+            Mengenal Huruf Hijaiyah
+        </h1>
 
-            <!-- Grid Huruf dengan padding kanan agar tidak tertutup gambar -->
-            <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]" style="direction: rtl;">
-                <?php foreach ($huruf as $h): ?>
-                    <div
-                        class="card bg-white rounded-xl p-3 shadow text-center cursor-pointer hover:ring-2 hover:ring-purple-400"
-                        onclick="playSound('<?= base_url($h['suara']) ?>')">
-                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-16 h-16 object-contain mx-auto mb-2">
-                        <p class="text-purple-800 font-bold text-lg"><?= $h['nama'] ?></p>
-                    </div>
-                <?php endforeach; ?>
-
-
-            </div>
-
-
-            <!-- Dekorasi Anak pindah sedikit ke atas dan diberi z-index kecil supaya tidak nutup -->
-            <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
-                class="absolute bottom-10 right-4 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-0" />
-
-            <!-- Tombol Kembali dengan Icon -->
-            <div class="text-center mt-4">
-                <a href="<?= base_url('siswa/home') ?>" class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
-                    <!-- Heroicon Left Arrow -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Kembali
-                </a>
-            </div>
-
-            <!-- Dekorasi Anak -->
+        <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]" style="direction: rtl;">
+            <?php foreach ($huruf as $h): ?>
+                <div
+                    class="card bg-white rounded-xl p-3 shadow text-center cursor-pointer hover:ring-2 hover:ring-purple-400"
+                    onclick="playSound('<?= base_url($h['suara']) ?>')">
+                    <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-16 h-16 object-contain mx-auto mb-2">
+                    <p class="text-purple-800 font-bold text-lg"><?= $h['nama'] ?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
 
+        <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
+            class="absolute bottom-10 right-4 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-0" />
 
-
+        <div class="text-center mt-4">
+            <a href="<?= base_url('siswa/home') ?>" class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Kembali
+            </a>
+        </div>
     </div>
+</div>
 
-    <script>
-        let currentAudio = null;
+<?= $this->endSection() ?>
 
-        function playSound(url) {
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-            }
-
-            currentAudio = new Audio(url);
-            currentAudio.play();
-        }
-    </script>
-
-</body>
-
-</html>
+<?= $this->section('script') ?>
+<script>
+    function playSound(url) {
+        const audio = new Audio(url);
+        audio.play().catch(error => {
+            console.error("Gagal memutar suara:", error);
+        });
+    }
+</script>
+<?= $this->endSection() ?>
