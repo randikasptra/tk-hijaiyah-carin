@@ -10,5 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         // Panggil seeder huruf
         $this->call('HurufSeeder');
+        $this->call('UserSeeder');
     }
 }
