@@ -79,29 +79,5 @@
             playSound(suara);
         });
     });
-
-    // Auto play MK_HIJAIYAH hanya sekali per sesi per halaman
-    const path = window.location.pathname;
-    const audioWelcome = new Audio("<?= base_url('sound/MK_HIJAIYAH.mp3') ?>");
-
-    if (path.includes('/siswa/mengenal') || path.includes('/siswa/menghafal')) {
-        const key = 'welcome_played_' + (path.includes('menghafal') ? 'hafal' : 'mengenal');
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem(key)) {
-                audioWelcome.volume = 1;
-                audioWelcome.play().then(() => {
-                    sessionStorage.setItem(key, 'true');
-                }).catch(() => {
-                    window.addEventListener("click", () => {
-                        audioWelcome.play();
-                        sessionStorage.setItem(key, 'true');
-                    }, {
-                        once: true
-                    });
-                });
-            }
-        });
-    }
 </script>
 <?= $this->endSection() ?>

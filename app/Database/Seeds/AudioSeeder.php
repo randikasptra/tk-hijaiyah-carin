@@ -14,6 +14,10 @@ class AudioSeeder extends Seeder
                 'file' => 'sound/Backsoundd.mp3'
             ],
             [
+                'nama' => 'backsound',
+                'file' => 'sound/Mengenal.mp3'
+            ],
+            [
                 'nama' => 'harakat',
                 'file' => 'sound/MK_HIJAIYAH.mp3'
             ]

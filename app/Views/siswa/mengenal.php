@@ -81,21 +81,24 @@
 
 <div class="w-full h-screen bg-cover bg-center relative z-10" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
     <div class="flex flex-col justify-between h-full px-4 pt-4 pb-4 relative">
+        <!-- Judul -->
         <h1 class="text-3xl md:text-4xl font-extrabold text-center text-purple-800 drop-shadow mb-4">
             Mengenal Huruf Hijaiyah
         </h1>
 
+        <!-- Grid Huruf -->
         <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-4 p-4 pr-24 rounded-2xl shadow-xl overflow-y-auto bg-white/50 backdrop-blur-sm max-h-[75vh] mx-auto w-full max-w-[90vw]" style="direction: rtl;">
             <?php foreach ($huruf as $h): ?>
                 <div
                     class="card bg-white rounded-xl p-3 shadow text-center cursor-pointer hover:ring-2 hover:ring-purple-400"
                     onclick="playSound('<?= base_url($h['suara']) ?>')">
                     <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>" class="w-16 h-16 object-contain mx-auto mb-2">
-                    <p class="text-purple-800 font-bold text-lg"><?= $h['nama'] ?></p>
+                    <p class="text-purple-800 font-bold text-lg"><?= esc($h['nama']) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
 
+        <!-- Ornamen & Tombol -->
         <img src="<?= base_url('assets/img/mini-cartoon.png') ?>" alt="Dekorasi"
             class="absolute bottom-10 right-4 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-0" />
 
@@ -114,13 +117,20 @@
 
 <?= $this->section('script') ?>
 <script>
+    let currentAudio = null;
+
     function playSound(url) {
         if (!url) return;
-        const audio = new Audio(url);
-        audio.play().catch(err => {
+
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+
+        currentAudio = new Audio(url);
+        currentAudio.play().catch(err => {
             console.warn("Gagal memutar suara:", err);
         });
     }
 </script>
 <?= $this->endSection() ?>
-

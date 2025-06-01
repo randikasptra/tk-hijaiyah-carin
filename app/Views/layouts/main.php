@@ -11,12 +11,11 @@
             width: 100px;
         }
     </style>
-
 </head>
 
 <body class="relative bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
 
-    <!-- 🎵 Backsound -->
+    <!-- 🎵 Backsound Utama -->
     <audio id="backsound" autoplay loop>
         <source src="<?= base_url('sound/' . ($backsound ?? 'Backsoundd.mp3')) ?>" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -33,70 +32,73 @@
         <?= $this->renderSection('content') ?>
     </main>
 
+    <!-- 🔧 Script Backsound & Volume -->
     <script>
-        const audio = document.getElementById("backsound");
+        const backsound = document.getElementById("backsound");
         const toggleSound = document.getElementById("toggleSound");
         const volumeSlider = document.getElementById("volumeControl");
 
-        // Ambil volume & mute dari localStorage
         const savedVolume = localStorage.getItem("volumeLevel") || 0.5;
         const isMuted = localStorage.getItem("isMuted") === "true";
 
-        audio.volume = savedVolume;
+        backsound.volume = savedVolume;
         volumeSlider.value = savedVolume;
-        audio.muted = isMuted;
+        backsound.muted = isMuted;
         toggleSound.textContent = isMuted ? "🔇" : "🔊";
 
-        // Cegah ulang backsound
         window.addEventListener("DOMContentLoaded", () => {
             if (!sessionStorage.getItem("audioPlayed")) {
-                audio.play();
+                backsound.play().catch(() => {});
                 sessionStorage.setItem("audioPlayed", "true");
             }
         });
 
         toggleSound.addEventListener("click", () => {
-            audio.muted = !audio.muted;
-            toggleSound.textContent = audio.muted ? "🔇" : "🔊";
-            localStorage.setItem("isMuted", audio.muted);
+            backsound.muted = !backsound.muted;
+            toggleSound.textContent = backsound.muted ? "🔇" : "🔊";
+            localStorage.setItem("isMuted", backsound.muted);
         });
 
         volumeSlider.addEventListener("input", (e) => {
-            audio.volume = e.target.value;
+            backsound.volume = e.target.value;
             localStorage.setItem("volumeLevel", e.target.value);
         });
     </script>
 
     <!-- 🧠 Script Tambahan dari Halaman -->
-    <!-- 🧠 Script Tambahan dari Halaman -->
     <?= $this->renderSection('script') ?>
 
-    <script>
-        const currentPath = window.location.pathname;
+   // main.php
 
-        // Khusus halaman menghafal
-        if (currentPath.includes('/siswa/menghafal')) {
-            const welcome = new Audio("<?= base_url('sound/MK_HIJAIYAH.mp3') ?>");
-            welcome.volume = 1;
+<script>
+    const path = window.location.pathname;
 
-            window.addEventListener("DOMContentLoaded", () => {
-                const played = sessionStorage.getItem("welcome_played_hafal");
+    let welcomeFile = "";
+    let sessionKey = "";
 
-                if (!played) {
-                    welcome.play().then(() => {
-                        sessionStorage.setItem("welcome_played_hafal", "true");
-                    }).catch(() => {
-                        // Jika autoplay gagal, tunggu klik user
-                        window.addEventListener("click", () => {
-                            welcome.play();
-                            sessionStorage.setItem("welcome_played_hafal", "true");
-                        }, {
-                            once: true
-                        });
-                    });
-                }
-            });
-        }
-    </script>
+    if (path.includes('/siswa/mengenal')) {
+        welcomeFile = "MENGENAL.mp3";
+        sessionKey = "welcome_played_mengenal";
+    } else if (path.includes('/siswa/menghafal')) {
+        welcomeFile = "MK_HIJAIYAH.mp3";
+        sessionKey = "welcome_played_hafal";
+    }
 
-</body>
+    if (welcomeFile && sessionKey) {
+        const welcome = new Audio("<?= base_url('sound/') ?>" + welcomeFile);
+        welcome.volume = 1;
+
+        window.addEventListener("DOMContentLoaded", () => {
+            if (!sessionStorage.getItem(sessionKey)) {
+                welcome.play().then(() => {
+                    sessionStorage.setItem(sessionKey, "true");
+                }).catch(() => {
+                    window.addEventListener("click", () => {
+                        welcome.play();
+                        sessionStorage.setItem(sessionKey, "true");
+                    }, { once: true });
+                });
+            }
+        });
+    }
+</script>
