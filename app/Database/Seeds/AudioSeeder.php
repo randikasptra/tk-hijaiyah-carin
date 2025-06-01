@@ -9,10 +9,17 @@ class AudioSeeder extends Seeder
     public function run()
     {
         $data = [
-            'nama' => 'backsound',
-            'file' => 'sound/Backsoundd.mp3'
+            [
+                'nama' => 'backsound',
+                'file' => 'sound/Backsoundd.mp3'
+            ],
+            [
+                'nama' => 'harakat',
+                'file' => 'sound/MK_HIJAIYAH.mp3'
+            ]
         ];
 
-        $this->db->table('audio')->insert($data);
+        // GANTI INI
+        $this->db->table('audio')->insertBatch($data);
     }
 }

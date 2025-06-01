@@ -22,15 +22,20 @@
     }
 
     @keyframes playfulBounce {
-        0%, 100% {
+
+        0%,
+        100% {
             transform: translateY(0) rotate(0);
         }
+
         25% {
             transform: translateY(-4px) rotate(2deg);
         }
+
         50% {
             transform: translateY(0) rotate(-2deg);
         }
+
         75% {
             transform: translateY(-2px) rotate(1deg);
         }
@@ -41,10 +46,12 @@
             transform: translateY(0) translateX(0);
             opacity: 0.7;
         }
+
         50% {
             transform: translateY(-50vh) translateX(20px);
             opacity: 0.5;
         }
+
         100% {
             transform: translateY(-100vh) translateX(-20px);
             opacity: 0;
@@ -61,6 +68,7 @@
     }
 </style>
 
+<!-- 🎈 Bubble Animasi -->
 <?php for ($i = 0; $i < 30; $i++): ?>
     <div class="bubble" style="
         left: <?= rand(0, 100) ?>vw;
@@ -107,10 +115,12 @@
 <?= $this->section('script') ?>
 <script>
     function playSound(url) {
+        if (!url) return;
         const audio = new Audio(url);
-        audio.play().catch(error => {
-            console.error("Gagal memutar suara:", error);
+        audio.play().catch(err => {
+            console.warn("Gagal memutar suara:", err);
         });
     }
 </script>
 <?= $this->endSection() ?>
+

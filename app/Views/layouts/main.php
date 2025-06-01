@@ -68,8 +68,35 @@
     </script>
 
     <!-- 🧠 Script Tambahan dari Halaman -->
+    <!-- 🧠 Script Tambahan dari Halaman -->
     <?= $this->renderSection('script') ?>
 
-</body>
+    <script>
+        const currentPath = window.location.pathname;
 
-</html>
+        // Khusus halaman menghafal
+        if (currentPath.includes('/siswa/menghafal')) {
+            const welcome = new Audio("<?= base_url('sound/MK_HIJAIYAH.mp3') ?>");
+            welcome.volume = 1;
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const played = sessionStorage.getItem("welcome_played_hafal");
+
+                if (!played) {
+                    welcome.play().then(() => {
+                        sessionStorage.setItem("welcome_played_hafal", "true");
+                    }).catch(() => {
+                        // Jika autoplay gagal, tunggu klik user
+                        window.addEventListener("click", () => {
+                            welcome.play();
+                            sessionStorage.setItem("welcome_played_hafal", "true");
+                        }, {
+                            once: true
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
