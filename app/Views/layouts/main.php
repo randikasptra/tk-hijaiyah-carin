@@ -1,4 +1,3 @@
-<!-- app/Views/layouts/main.php -->
 <!DOCTYPE html>
 <html lang="id">
 
@@ -12,6 +11,7 @@
             width: 100px;
         }
     </style>
+
 </head>
 
 <body class="relative bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
@@ -22,11 +22,10 @@
         Your browser does not support the audio element.
     </audio>
 
-
     <!-- 🔊 Kontrol Volume -->
     <div class="fixed bottom-4 left-4 bg-white/70 p-3 rounded-xl shadow-xl flex items-center gap-3 z-50">
         <button id="toggleSound" class="text-xl">🔊</button>
-        <input type="range" id="volumeControl" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+        <input type="range" id="volumeControl" class="volume-slider" min="0" max="1" step="0.01">
     </div>
 
     <!-- 🧩 Konten Dinamis -->
@@ -39,20 +38,32 @@
         const toggleSound = document.getElementById("toggleSound");
         const volumeSlider = document.getElementById("volumeControl");
 
-        audio.volume = volumeSlider.value;
+        // Ambil volume & mute dari localStorage
+        const savedVolume = localStorage.getItem("volumeLevel") || 0.5;
+        const isMuted = localStorage.getItem("isMuted") === "true";
+
+        audio.volume = savedVolume;
+        volumeSlider.value = savedVolume;
+        audio.muted = isMuted;
+        toggleSound.textContent = isMuted ? "🔇" : "🔊";
+
+        // Cegah ulang backsound
+        window.addEventListener("DOMContentLoaded", () => {
+            if (!sessionStorage.getItem("audioPlayed")) {
+                audio.play();
+                sessionStorage.setItem("audioPlayed", "true");
+            }
+        });
 
         toggleSound.addEventListener("click", () => {
-            if (audio.muted) {
-                audio.muted = false;
-                toggleSound.textContent = "🔊";
-            } else {
-                audio.muted = true;
-                toggleSound.textContent = "🔇";
-            }
+            audio.muted = !audio.muted;
+            toggleSound.textContent = audio.muted ? "🔇" : "🔊";
+            localStorage.setItem("isMuted", audio.muted);
         });
 
         volumeSlider.addEventListener("input", (e) => {
             audio.volume = e.target.value;
+            localStorage.setItem("volumeLevel", e.target.value);
         });
     </script>
 
