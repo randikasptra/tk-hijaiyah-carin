@@ -28,6 +28,8 @@ $routes->get('/siswa/game', 'Siswa::game'); // halaman game
 
 
 // $routes->get('/siswa/game', 'Game::index'); // halaman pilih level
-$routes->get('/siswa/game/level1', 'Game::level1'); // tanpa index, otomatis index 0
-$routes->post('/siswa/game/level1', 'Game::checkLevel1'); // handle submit dari index 0
-$routes->get('/siswa/game/selesai', 'Game::selesai'); // halaman selesai
+$routes->get('/siswa/game/tebak-huruf', 'Game::tebakHuruf');
+$routes->post('/siswa/game/cek', 'Game::cekHuruf');
+
+$routes->get('/siswa/game/tebak-harakat', 'Game::tebakHarakat');
+$routes->post('/siswa/game/cek-harakat', 'Game::cekHarakat');
