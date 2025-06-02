@@ -42,7 +42,7 @@
         <h1 class="text-4xl md:text-5xl font-extrabold text-purple-700 drop-shadow-sm">🎮 Game Hijaiyah</h1>
 
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="<?= base_url('siswa/game/level1') ?>"
+            <a href="<?= base_url('siswa/game/tebak_huruf') ?>"
                class="level-card bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 px-10 rounded-full font-bold text-lg pulse">
                 Iqro 1 
             </a>
