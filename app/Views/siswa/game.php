@@ -12,9 +12,12 @@
     }
 
     @keyframes pulseGlow {
-        0%, 100% {
+
+        0%,
+        100% {
             box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.6);
         }
+
         50% {
             box-shadow: 0 0 15px 5px rgba(168, 85, 247, 0.4);
         }
@@ -29,7 +32,7 @@
     <!-- Bubble Dekorasi -->
     <?php for ($i = 0; $i < 25; $i++): ?>
         <div class="absolute bottom-[-50px] bg-white/40 rounded-full"
-             style="
+            style="
                 width: <?= rand(20, 40) ?>px;
                 height: <?= rand(20, 40) ?>px;
                 left: <?= rand(0, 100) ?>%;
@@ -42,9 +45,9 @@
         <h1 class="text-4xl md:text-5xl font-extrabold text-purple-700 drop-shadow-sm">🎮 Game Hijaiyah</h1>
 
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="<?= base_url('siswa/game/tebak_huruf') ?>"
-               class="level-card bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 px-10 rounded-full font-bold text-lg pulse">
-                Iqro 1 
+            <a href="<?= base_url('siswa/game/level-huruf/0') ?>"
+                class="level-card bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 px-10 rounded-full font-bold text-lg pulse">
+                Iqro 1
             </a>
 
             <div class="bg-gradient-to-r from-gray-300 to-gray-400 text-white py-4 px-10 rounded-full font-bold text-lg opacity-60 cursor-not-allowed">
@@ -53,7 +56,7 @@
         </div>
 
         <a href="<?= base_url('siswa') ?>"
-           class="inline-block text-sm text-gray-700 hover:underline transition-all duration-300">
+            class="inline-block text-sm text-gray-700 hover:underline transition-all duration-300">
             ⬅️ Kembali ke Dashboard
         </a>
     </div>
