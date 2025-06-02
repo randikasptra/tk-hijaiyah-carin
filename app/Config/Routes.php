@@ -27,9 +27,7 @@ $routes->get('/siswa/menghafal', 'Siswa::menghafal'); // halaman belajar huruf h
 $routes->get('/siswa/game', 'Siswa::game'); // halaman game
 
 
-// Untuk memulai level 1 dari huruf pertama (index 0)
 // $routes->get('/siswa/game', 'Game::index'); // halaman pilih level
-$routes->get('/siswa/game/level1/(:num)', 'Game::level1/$1'); // halaman huruf level 1
-$routes->post('/siswa/game/level1/(:num)', 'Game::checkLevel1/$1'); // submit jawaban
+$routes->get('/siswa/game/level1', 'Game::level1'); // tanpa index, otomatis index 0
+$routes->post('/siswa/game/level1', 'Game::checkLevel1'); // handle submit dari index 0
 $routes->get('/siswa/game/selesai', 'Game::selesai'); // halaman selesai
-

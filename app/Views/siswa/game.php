@@ -1,28 +1,68 @@
-<!-- views/siswa/game.php -->
-<!DOCTYPE html>
-<html lang="id">
+<?= $this->extend('layouts/main') ?>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Game Hijaiyah</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+<?= $this->section('content') ?>
+<style>
+    .level-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-<body class="bg-yellow-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white/80 backdrop-blur-md p-10 rounded-xl shadow-xl text-center space-y-6">
-        <h1 class="text-3xl font-bold text-purple-800">Pilih Level Game</h1>
+    .level-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(128, 90, 213, 0.4);
+    }
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="<?= base_url('siswa/game/level1') ?>" class="bg-purple-500 hover:bg-purple-600 text-white py-3 px-8 rounded-full font-bold text-lg shadow-md">
-                Level 1
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.6);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px rgba(168, 85, 247, 0.4);
+        }
+    }
+
+    .pulse {
+        animation: pulseGlow 2s infinite;
+    }
+</style>
+
+<div class="relative w-full h-screen flex items-center justify-center overflow-hidden bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+    <!-- Bubble Dekorasi -->
+    <?php for ($i = 0; $i < 25; $i++): ?>
+        <div class="absolute bottom-[-50px] bg-white/40 rounded-full"
+             style="
+                width: <?= rand(20, 40) ?>px;
+                height: <?= rand(20, 40) ?>px;
+                left: <?= rand(0, 100) ?>%;
+                animation: floatBubble <?= rand(12, 25) ?>s linear infinite;
+                animation-delay: <?= rand(0, 5) ?>s;">
+        </div>
+    <?php endfor; ?>
+
+    <div class="bg-white/50 backdrop-blur-lg rounded-3xl shadow-2xl px-8 py-12 w-full max-w-xl text-center space-y-8 z-10">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-purple-700 drop-shadow-sm">🎮 Game Hijaiyah</h1>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="<?= base_url('siswa/game/level1') ?>"
+               class="level-card bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 px-10 rounded-full font-bold text-lg pulse">
+                Iqro 1 
             </a>
-            <a href="#" class="bg-purple-300 text-white py-3 px-8 rounded-full font-bold text-lg shadow-md cursor-not-allowed opacity-50">
+
+            <div class="bg-gradient-to-r from-gray-300 to-gray-400 text-white py-4 px-10 rounded-full font-bold text-lg opacity-60 cursor-not-allowed">
                 Level 2 (Coming Soon)
-            </a>
+            </div>
         </div>
 
-        <a href="<?= base_url('/siswa') ?>" class="inline-block mt-4 text-sm text-gray-600 hover:underline">Kembali ke Dashboard</a>
+        <a href="<?= base_url('siswa') ?>"
+           class="inline-block text-sm text-gray-700 hover:underline transition-all duration-300">
+            ⬅️ Kembali ke Dashboard
+        </a>
     </div>
-</body>
+</div>
+<?= $this->endSection() ?>
 
-</html>
+<?= $this->section('script') ?>
+<script>
+    // Animasi bubble (sudah di-declare global di layout jika ada)
+    // Tidak perlu kode tambahan di sini kecuali game-nya interaktif nanti
+</script>
+<?= $this->endSection() ?>
