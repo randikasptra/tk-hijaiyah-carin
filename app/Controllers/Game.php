@@ -79,38 +79,67 @@ class Game extends BaseController
     }
 
 
-    public function levelHarakat($huruf = 'ba')
+    public function levelHarakat($step = 0)
     {
-        $huruf = strtolower($huruf);
+        $soal = session()->get('game_harakat_soal');
+        if (!isset($soal[$step])) {
+            return redirect()->to('/siswa/game/selesai');
+        }
+
+        $huruf = $soal[$step];
         $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
         shuffle($pilihan);
 
         return view('siswa/game/tebak_harakat', [
             'huruf' => $huruf,
             'pilihan' => $pilihan,
+            'step' => $step,
             'jawaban' => null,
             'status' => null
         ]);
     }
 
+
     public function checkLevelHarakat()
     {
+        $step = (int) $this->request->getPost('step');
         $huruf = strtolower($this->request->getPost('huruf'));
         $jawaban = strtolower($this->request->getPost('jawaban'));
         $benar = $huruf . 'a';
-
         $status = $jawaban === $benar ? 'benar' : 'salah';
+
+        if ($status === 'benar') {
+            $score = session()->get('game_harakat_score') ?? 0;
+            session()->set('game_harakat_score', $score + 20);
+        }
 
         $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
         shuffle($pilihan);
 
+        // ⛔️ Kalau sudah selesai
+        if ($step >= 4) {
+            return redirect()->to('/siswa/game/selesai');
+        }
+
         return view('siswa/game/tebak_harakat', [
-            'huruf' => $huruf,
+            'huruf' => session()->get('game_harakat_soal')[$step + 1],
             'pilihan' => $pilihan,
+            'step' => $step + 1,
             'jawaban' => $jawaban,
             'status' => $status
         ]);
     }
+
+    public function startHarakat()
+    {
+        $hurufDasar = ['ba', 'ta', 'tsa', 'fa', 'kaf', 'lam', 'nun', 'ya', 'ha'];
+        shuffle($hurufDasar);
+        $soal = array_slice($hurufDasar, 0, 5); // ambil 5 soal acak
+        session()->set('game_harakat_soal', $soal);
+        session()->set('game_harakat_score', 0);
+        return redirect()->to('/siswa/game/level-harakat/0');
+    }
+
 
     private function generatePilihanHuruf($benar, $list)
     {

@@ -2,13 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\UserModel;
 
 class Admin extends BaseController
 {
     public function index()
     {
-        return view('admin/dashboard'); 
+        $userModel = new UserModel();
+
+        $jumlahSiswa = $userModel->where('role', 'siswa')->countAllResults(); // hitung siswa
+
+        return view('admin/dashboard', [
+            'jumlahSiswa' => $jumlahSiswa,
+        ]);
     }
 }

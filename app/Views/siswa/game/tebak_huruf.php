@@ -47,8 +47,6 @@
 
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
-
-
                 <!-- Tombol Dashboard -->
                 <a href="<?= base_url('/siswa') ?>"
                     class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">

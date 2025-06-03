@@ -61,10 +61,11 @@
                 ✨ Tebak Huruf Hijaiyah (Iqro 1)
             </a>
 
-            <a href="<?= base_url('siswa/game/level-harakat/ba') ?>"
+            <a href="<?= base_url('siswa/game/start-harakat') ?>"
                 class="level-card bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 px-10 rounded-full font-bold text-lg block hover:shadow-xl transition">
                 🌟 Tebak Harakat Hijaiyah
             </a>
+            
 
             <div class="bg-gradient-to-r from-gray-300 to-gray-400 text-white py-4 px-10 rounded-full font-bold text-lg opacity-60 cursor-not-allowed">
                 🔒 Level Lanjutan (Coming Soon)

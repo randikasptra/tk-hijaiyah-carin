@@ -35,3 +35,4 @@ $routes->post('/siswa/game/level-harakat', 'Game::checkLevelHarakat');
 $routes->get('/siswa/game/level-huruf/(:num)', 'Game::levelHuruf/$1');
 $routes->post('/siswa/game/level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
 $routes->get('/siswa/game/selesai', 'Game::selesai');
+$routes->get('/siswa/game/start-harakat', 'Game::startHarakat');
