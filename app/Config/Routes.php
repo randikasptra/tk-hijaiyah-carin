@@ -36,3 +36,13 @@ $routes->get('/siswa/game/level-huruf/(:num)', 'Game::levelHuruf/$1');
 $routes->post('/siswa/game/level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
 $routes->get('/siswa/game/selesai', 'Game::selesai');
 $routes->get('/siswa/game/start-harakat', 'Game::startHarakat');
+
+
+
+
+$routes->get('/admin/user', 'Admin::dataUser');
+$routes->get('/admin/user/tambah', 'Admin::tambahUser');
+$routes->post('/admin/user/tambah', 'Admin::simpanUser');
+$routes->get('/admin/user/edit/(:num)', 'Admin::editUser/$1');
+$routes->post('/admin/user/edit/(:num)', 'Admin::updateUser/$1');
+$routes->get('/admin/user/hapus/(:num)', 'Admin::hapusUser/$1');
