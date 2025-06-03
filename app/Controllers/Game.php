@@ -39,24 +39,36 @@ class Game extends BaseController
         $session = session();
         $hurufModel = new \App\Models\HurufModel();
         $soal = $session->get('game_huruf_soal');
+
+        // ⛔️ Cegah akses jika index melebihi jumlah soal
+        if (!isset($soal[$step])) {
+            return redirect()->to('/siswa/game/selesai');
+        }
+
         $jawaban = strtolower($this->request->getPost('jawaban'));
         $benar = strtolower($soal[$step]['nama']);
         $status = $jawaban === $benar ? 'benar' : 'salah';
 
-        // Tambah skor jika benar
+        // ✅ Tambah skor jika benar
         if ($status === 'benar') {
             $score = $session->get('game_huruf_score') ?? 0;
             $session->set('game_huruf_score', $score + 20);
         }
 
+        // ⛔️ Kalau sudah terakhir, langsung ke selesai
+        if ($step >= count($soal) - 1) {
+            return redirect()->to('/siswa/game/selesai');
+        }
+
         return view('siswa/game/tebak_huruf', [
-            'huruf' => $soal[$step],
-            'pilihan' => $this->generatePilihanHuruf($soal[$step]['nama'], $soal),
+            'huruf' => $soal[$step + 1],
+            'pilihan' => $this->generatePilihanHuruf($soal[$step + 1]['nama'], $soal),
             'index' => $step + 1,
             'jawaban' => $jawaban,
             'status' => $status
         ]);
     }
+
 
     public function selesai()
     {
@@ -112,6 +124,4 @@ class Game extends BaseController
         shuffle($opsi);
         return $opsi;
     }
-
-    
 }

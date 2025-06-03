@@ -31,19 +31,20 @@
         </form>
 
         <?php if ($status): ?>
-            <div class="text-lg font-semibold <?= $status === 'benar' ? 'text-green-600' : 'text-red-600' ?>">
-                <?= $status === 'benar' ? '🎉 Jawaban Benar!' : '❌ Jawaban Salah!' ?>
-            </div>
+            <?php if ($status): ?>
+                <div class="flex flex-col items-center space-y-2">
+                    <?php if ($status === 'benar'): ?>
+                        <img src="<?= base_url('assets/img/icon-benar.png') ?>" alt="Benar" class="w-24 h-24 animate-bounce">
+                        <span class="text-green-600 font-bold text-xl">Bagus! 🎉</span>
+                    <?php else: ?>
+                        <img src="<?= base_url('assets/img/icon-salah.png') ?>" alt="Salah" class="w-24 h-24 animate-pulse">
+                        <span class="text-red-600 font-bold text-xl">Coba Lagi 😢</span>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
-                <!-- Tombol Next -->
-                <a href="<?= base_url('siswa/game/level-huruf/' . $index) ?>"
-                    class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    Soal Selanjutnya
-                </a>
 
 
                 <!-- Tombol Dashboard -->
@@ -60,4 +61,14 @@
         <?php endif; ?>
     </div>
 </div>
+
+<script>
+    <?php if ($status): ?>
+        const status = "<?= $status ?>";
+        const sound = new Audio("<?= base_url('sound/' . ($status === 'benar' ? 'benar.mp3' : 'salah.mp3')) ?>");
+        sound.play().catch(err => console.warn("Gagal play suara:", err));
+    <?php endif; ?>
+</script>
+
+
 <?= $this->endSection() ?>
