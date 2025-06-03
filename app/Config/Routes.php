@@ -27,8 +27,11 @@ $routes->get('/siswa/menghafal', 'Siswa::menghafal'); // halaman belajar huruf h
 $routes->get('/siswa/game', 'Siswa::game'); // halaman game
 
 
-$routes->get('/siswa/game/level-huruf/(:num)', 'Game::levelHuruf/$1');
-$routes->post('/siswa/game/level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
 
 $routes->get('/siswa/game/level-harakat/(:segment)', 'Game::levelHarakat/$1');
 $routes->post('/siswa/game/level-harakat', 'Game::checkLevelHarakat');
+
+
+$routes->get('/siswa/game/level-huruf/(:num)', 'Game::levelHuruf/$1');
+$routes->post('/siswa/game/level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
+$routes->get('/siswa/game/selesai', 'Game::selesai');
