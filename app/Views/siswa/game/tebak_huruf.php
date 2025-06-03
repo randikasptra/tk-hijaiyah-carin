@@ -31,17 +31,19 @@
         </form>
 
         <?php if ($status): ?>
-            <?php if ($status): ?>
-                <div class="flex flex-col items-center space-y-2">
+            <?php if (isset($status) && in_array($status, ['benar', 'salah'])): ?>
+                <div class="flex flex-col items-center space-y-3 mt-4">
                     <?php if ($status === 'benar'): ?>
                         <img src="<?= base_url('assets/img/icon-benar.png') ?>" alt="Benar" class="w-24 h-24 animate-bounce">
-                        <span class="text-green-600 font-bold text-xl">Bagus! 🎉</span>
+                        <span class="text-green-600 font-extrabold text-2xl">Hebat!</span>
                     <?php else: ?>
-                        <img src="<?= base_url('assets/img/icon-salah.png') ?>" alt="Salah" class="w-24 h-24 animate-pulse">
-                        <span class="text-red-600 font-bold text-xl">Coba Lagi 😢</span>
+                        <img src="<?= base_url('assets/img/icon-salah.png') ?>" alt="Salah" class="w-24 h-24 animate-ping">
+                        <span class="text-red-500 font-extrabold text-2xl">Yuk Coba Lagi!</span>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
+
+
 
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
@@ -63,12 +65,16 @@
 </div>
 
 <script>
-    <?php if ($status): ?>
-        const status = "<?= $status ?>";
-        const sound = new Audio("<?= base_url('sound/' . ($status === 'benar' ? 'benar.mp3' : 'salah.mp3')) ?>");
-        sound.play().catch(err => console.warn("Gagal play suara:", err));
+    <?php if (isset($status) && in_array($status, ['benar', 'salah'])): ?>
+        document.addEventListener("DOMContentLoaded", function () {
+            const soundFile = "<?= base_url('sound/' . ($status === 'benar' ? 'benar.mp3' : 'salah.mp3')) ?>";
+            const sound = new Audio(soundFile);
+            sound.volume = 1;
+            sound.play().catch(err => console.warn("Gagal memutar suara:", err));
+        });
     <?php endif; ?>
 </script>
+
 
 
 <?= $this->endSection() ?>
