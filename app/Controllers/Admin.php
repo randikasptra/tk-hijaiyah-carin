@@ -9,11 +9,80 @@ class Admin extends BaseController
     public function index()
     {
         $userModel = new UserModel();
-
-        $jumlahSiswa = $userModel->where('role', 'siswa')->countAllResults(); // hitung siswa
+        $jumlahSiswa = $userModel->where('role', 'siswa')->countAllResults();
 
         return view('admin/dashboard', [
             'jumlahSiswa' => $jumlahSiswa,
         ]);
+    }
+
+    public function dataUser()
+{
+    $userModel = new \App\Models\UserModel();
+    $users = $userModel->findAll(); // ini oke
+    return view('admin/data_user', ['users' => $users]);
+}
+
+
+    public function tambahUser()
+    {
+        return view('admin/tambah_user');
+    }
+
+    public function simpanUser()
+    {
+        $userModel = new UserModel();
+
+        $data = [
+            'nama'     => $this->request->getPost('nama'),
+            'username' => $this->request->getPost('username'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role'     => $this->request->getPost('role')
+        ];
+
+        $userModel->insert($data);
+
+        return redirect()->to('/admin/user')->with('success', 'User berhasil ditambahkan');
+    }
+
+    public function editUser($id)
+    {
+        $userModel = new UserModel();
+        $user = $userModel->find($id);
+
+        if (!$user) {
+            return redirect()->to('/admin/user')->with('error', 'User tidak ditemukan');
+        }
+
+        return view('admin/edit_user', ['user' => $user]);
+    }
+
+    public function updateUser($id)
+    {
+        $userModel = new UserModel();
+
+        $data = [
+            'nama'     => $this->request->getPost('nama'),
+            'username' => $this->request->getPost('username'),
+            'role'     => $this->request->getPost('role')
+        ];
+
+        // Jika ada password baru
+        $password = $this->request->getPost('password');
+        if ($password) {
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        $userModel->update($id, $data);
+
+        return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui');
+    }
+
+    public function hapusUser($id)
+    {
+        $userModel = new UserModel();
+        $userModel->delete($id);
+
+        return redirect()->to('/admin/user')->with('success', 'User berhasil dihapus');
     }
 }
