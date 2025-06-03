@@ -6,48 +6,66 @@ use App\Models\HurufModel;
 
 class Game extends BaseController
 {
-    public function levelHuruf($index = 0)
+    // Game.php
+    public function levelHuruf($step = 0)
     {
-        $hurufModel = new HurufModel();
-        $hurufList = $hurufModel->findAll();
+        $session = session();
+        $hurufModel = new \App\Models\HurufModel();
 
-        if (!isset($hurufList[$index])) {
+        if ($step == 0) {
+            // Ambil 5 soal acak dan simpan di session
+            $soal = $hurufModel->orderBy('RAND()')->findAll(5);
+            $session->set('game_huruf_soal', $soal);
+            $session->set('game_huruf_score', 0);
+        } else {
+            $soal = $session->get('game_huruf_soal');
+        }
+
+        if (!isset($soal[$step])) {
             return redirect()->to('/siswa/game/selesai');
         }
 
-        $huruf = $hurufList[$index];
-        $pilihan = $this->generatePilihanHuruf($huruf['nama'], $hurufList);
-
         return view('siswa/game/tebak_huruf', [
-            'huruf' => $huruf,
-            'index' => $index,
-            'pilihan' => $pilihan,
+            'huruf' => $soal[$step],
+            'pilihan' => $this->generatePilihanHuruf($soal[$step]['nama'], $soal),
+            'index' => $step,
             'jawaban' => null,
             'status' => null
         ]);
     }
 
-    public function checkLevelHuruf($index = 0)
+    public function checkLevelHuruf($step = 0)
     {
-        $hurufModel = new HurufModel();
-        $hurufList = $hurufModel->findAll();
+        $session = session();
+        $hurufModel = new \App\Models\HurufModel();
+        $soal = $session->get('game_huruf_soal');
+        $jawaban = strtolower($this->request->getPost('jawaban'));
+        $benar = strtolower($soal[$step]['nama']);
+        $status = $jawaban === $benar ? 'benar' : 'salah';
 
-        if (!isset($hurufList[$index])) {
-            return redirect()->to('/siswa/game/selesai');
+        // Tambah skor jika benar
+        if ($status === 'benar') {
+            $score = $session->get('game_huruf_score') ?? 0;
+            $session->set('game_huruf_score', $score + 20);
         }
 
-        $huruf = $hurufList[$index];
-        $jawaban = strtolower($this->request->getPost('jawaban'));
-        $status = strtolower($huruf['nama']) === $jawaban ? 'benar' : 'salah';
-
-        return view('siswa/game/tebak_huruf', [ // ✅ GANTI view ke tebak_huruf
-            'huruf' => $huruf,
-            'index' => $index,
-            'pilihan' => $this->generatePilihanHuruf($huruf['nama'], $hurufList),
+        return view('siswa/game/tebak_huruf', [
+            'huruf' => $soal[$step],
+            'pilihan' => $this->generatePilihanHuruf($soal[$step]['nama'], $soal),
+            'index' => $step + 1,
             'jawaban' => $jawaban,
             'status' => $status
         ]);
     }
+
+    public function selesai()
+    {
+        $score = session()->get('game_huruf_score') ?? 0;
+        session()->remove(['game_huruf_soal', 'game_huruf_score']);
+
+        return view('siswa/game/selesai', ['score' => $score]);
+    }
+
 
     public function levelHarakat($huruf = 'ba')
     {
@@ -55,7 +73,7 @@ class Game extends BaseController
         $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
         shuffle($pilihan);
 
-        return view('siswa/game/tebak_harakat', [ // ✅ GANTI view ke tebak_harakat
+        return view('siswa/game/tebak_harakat', [
             'huruf' => $huruf,
             'pilihan' => $pilihan,
             'jawaban' => null,
@@ -74,7 +92,7 @@ class Game extends BaseController
         $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
         shuffle($pilihan);
 
-        return view('siswa/game/tebak_harakat', [ // ✅ GANTI view ke tebak_harakat
+        return view('siswa/game/tebak_harakat', [
             'huruf' => $huruf,
             'pilihan' => $pilihan,
             'jawaban' => $jawaban,
@@ -95,8 +113,5 @@ class Game extends BaseController
         return $opsi;
     }
 
-    public function selesai()
-    {
-        return view('siswa/game/selesai');
-    }
+    
 }
