@@ -37,14 +37,14 @@
 
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
                 <!-- Tombol Next -->
-                <a href="<?= base_url('siswa/game/level-huruf/' . ($index + 1)) ?>"
+                <a href="<?= base_url('siswa/game/level-huruf/' . $index) ?>"
                     class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                     Soal Selanjutnya
                 </a>
+
 
                 <!-- Tombol Dashboard -->
                 <a href="<?= base_url('/siswa') ?>"
