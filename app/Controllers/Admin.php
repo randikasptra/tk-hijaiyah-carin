@@ -10,19 +10,21 @@ class Admin extends BaseController
     {
         $userModel = new UserModel();
         $jumlahSiswa = $userModel->where('role', 'siswa')->countAllResults();
+        $jumlahGuru = $userModel->where('role', 'guru')->countAllResults();
 
         return view('admin/dashboard', [
             'jumlahSiswa' => $jumlahSiswa,
+            'jumlahGuru' => $jumlahGuru,
         ]);
     }
 
     public function dataUser()
-{
-    $userModel = new \App\Models\UserModel();
-    $users = $userModel->findAll(); // ini oke
-    return view('admin/data_user', ['users' => $users]);
-}
+    {
+        $userModel = new UserModel();
+        $users = $userModel->findAll();
 
+        return view('admin/data_user', ['users' => $users]);
+    }
 
     public function tambahUser()
     {
@@ -34,8 +36,8 @@ class Admin extends BaseController
         $userModel = new UserModel();
 
         $data = [
-            'nama'     => $this->request->getPost('nama'),
-            'username' => $this->request->getPost('username'),
+            'name'     => $this->request->getPost('name'),
+            'email'    => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'role'     => $this->request->getPost('role')
         ];
@@ -62,12 +64,11 @@ class Admin extends BaseController
         $userModel = new UserModel();
 
         $data = [
-            'nama'     => $this->request->getPost('nama'),
-            'username' => $this->request->getPost('username'),
-            'role'     => $this->request->getPost('role')
+            'name'  => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'role'  => $this->request->getPost('role')
         ];
 
-        // Jika ada password baru
         $password = $this->request->getPost('password');
         if ($password) {
             $data['password'] = password_hash($password, PASSWORD_DEFAULT);

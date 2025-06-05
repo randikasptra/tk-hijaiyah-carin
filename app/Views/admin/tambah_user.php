@@ -4,7 +4,8 @@
 <div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow">
     <h2 class="text-2xl font-bold mb-4 text-blue-800">Tambah User</h2>
 
-    <form action="<?= base_url('admin/user/simpan') ?>" method="post">
+    <form action="<?= base_url('admin/user/tambah') ?>" method="post">
+
         <?= csrf_field() ?>
 
         <div class="mb-4">

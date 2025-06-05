@@ -33,14 +33,11 @@
                 </div>
 
                 <div class="bg-purple-200 p-6 rounded-xl shadow-md">
-                    <h3 class="text-xl font-bold text-purple-800 mb-2">Jumlah Soal</h3>
-                    <p class="text-4xl font-bold text-purple-900">25</p>
+                    <h3 class="text-xl font-bold text-purple-800 mb-2">Jumlah Guru</h3>
+                    <p class="text-4xl font-bold text-purple-900"><?= esc($jumlahGuru) ?></p>
                 </div>
 
-                <div class="bg-green-200 p-6 rounded-xl shadow-md">
-                    <h3 class="text-xl font-bold text-green-800 mb-2">Rata-rata Skor</h3>
-                    <p class="text-4xl font-bold text-green-900">82%</p>
-                </div>
+               
             </div>
         </main>
 
