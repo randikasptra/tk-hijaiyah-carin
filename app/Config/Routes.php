@@ -54,3 +54,4 @@ $routes->post('/admin/user/tambah', 'Admin::simpanUser');
 $routes->get('/admin/user/edit/(:num)', 'Admin::editUser/$1');
 $routes->post('/admin/user/edit/(:num)', 'Admin::updateUser/$1');
 $routes->get('/admin/user/hapus/(:num)', 'Admin::hapusUser/$1');
+
