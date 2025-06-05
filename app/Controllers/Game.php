@@ -10,7 +10,7 @@ class Game extends BaseController
     public function levelHuruf($step = 0)
     {
         $session = session();
-        $hurufModel = new \App\Models\HurufModel();
+        $hurufModel = new HurufModel();
 
         if ($step == 0) {
             // Ambil 5 soal acak dan simpan di session
@@ -22,10 +22,10 @@ class Game extends BaseController
         }
 
         if (!isset($soal[$step])) {
-            return redirect()->to('/siswa/game/selesai');
+            return redirect()->to('/materi/game/selesai');
         }
 
-        return view('siswa/game/tebak_huruf', [
+        return view('materi/game/tebak_huruf', [
             'huruf' => $soal[$step],
             'pilihan' => $this->generatePilihanHuruf($soal[$step]['nama'], $soal),
             'index' => $step,
@@ -37,12 +37,12 @@ class Game extends BaseController
     public function checkLevelHuruf($step = 0)
     {
         $session = session();
-        $hurufModel = new \App\Models\HurufModel();
+        $hurufModel = new HurufModel();
         $soal = $session->get('game_huruf_soal');
 
         // ⛔️ Cegah akses jika index melebihi jumlah soal
         if (!isset($soal[$step])) {
-            return redirect()->to('/siswa/game/selesai');
+            return redirect()->to('/materi/game/selesai');
         }
 
         $jawaban = strtolower($this->request->getPost('jawaban'));
@@ -57,10 +57,10 @@ class Game extends BaseController
 
         // ⛔️ Kalau sudah terakhir, langsung ke selesai
         if ($step >= count($soal) - 1) {
-            return redirect()->to('/siswa/game/selesai');
+            return redirect()->to('/materi/game/selesai');
         }
 
-        return view('siswa/game/tebak_huruf', [
+        return view('materi/game/tebak_huruf', [
             'huruf' => $soal[$step + 1],
             'pilihan' => $this->generatePilihanHuruf($soal[$step + 1]['nama'], $soal),
             'index' => $step + 1,
@@ -74,8 +74,9 @@ class Game extends BaseController
     {
         $score = session()->get('game_huruf_score') ?? 0;
         session()->remove(['game_huruf_soal', 'game_huruf_score']);
+        session()->remove(['game_harakat_soal', 'game_harakat_score']);
 
-        return view('siswa/game/selesai', ['score' => $score]);
+        return view('materi/game/selesai', ['score' => $score]);
     }
 
 
@@ -83,14 +84,14 @@ class Game extends BaseController
     {
         $soal = session()->get('game_harakat_soal');
         if (!isset($soal[$step])) {
-            return redirect()->to('/siswa/game/selesai');
+            return redirect()->to('/materi/game/selesai');
         }
 
         $huruf = $soal[$step];
         $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
         shuffle($pilihan);
 
-        return view('siswa/game/tebak_harakat', [
+        return view('materi/game/tebak_harakat', [
             'huruf' => $huruf,
             'pilihan' => $pilihan,
             'step' => $step,
@@ -118,10 +119,10 @@ class Game extends BaseController
 
         // ⛔️ Kalau sudah selesai
         if ($step >= 4) {
-            return redirect()->to('/siswa/game/selesai');
+            return redirect()->to('/materi/game/selesai');
         }
 
-        return view('siswa/game/tebak_harakat', [
+        return view('materi/game/tebak_harakat', [
             'huruf' => session()->get('game_harakat_soal')[$step + 1],
             'pilihan' => $pilihan,
             'step' => $step + 1,
@@ -137,7 +138,7 @@ class Game extends BaseController
         $soal = array_slice($hurufDasar, 0, 5); // ambil 5 soal acak
         session()->set('game_harakat_soal', $soal);
         session()->set('game_harakat_score', 0);
-        return redirect()->to('/siswa/game/level-harakat/0');
+        return redirect()->to('/materi/game/level-harakat/0');
     }
 
 

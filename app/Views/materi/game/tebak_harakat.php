@@ -5,7 +5,7 @@
     style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
 
     <!-- Tombol Kembali -->
-    <a href="<?= base_url('siswa/game') ?>"
+    <a href="<?= base_url('materi/game') ?>"
         class="absolute top-4 left-4 bg-white/80 hover:bg-white text-purple-700 font-bold py-2 px-4 rounded-full shadow-md flex items-center transition transform hover:scale-105 z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -22,7 +22,7 @@
             class="w-40 h-40 mx-auto object-contain">
 
         <!-- Form pilihan -->
-        <form action="<?= base_url('siswa/game/level-harakat') ?>" method="post" class="space-y-4">
+        <form action="<?= base_url('materi/game/level-harakat') ?>" method="post" class="space-y-4">
             <input type="hidden" name="huruf" value="<?= esc($huruf) ?>">
             <input type="hidden" name="step" value="<?= $step ?>">
             <div class="grid grid-cols-3 gap-4">
@@ -46,7 +46,7 @@
                 <?php endif; ?>
 
                 <?php if ($step < 5): ?>
-                     <a href="<?= base_url('/siswa') ?>"
+                     <a href="<?= base_url('/materi') ?>"
                     class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -56,7 +56,7 @@
                     Dashboard
                 </a>
                 <?php else: ?>
-                    <a href="<?= base_url('siswa/game/selesai') ?>"
+                    <a href="<?= base_url('materi/game/selesai') ?>"
                         class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full shadow transition font-semibold">
                         Lihat Skor Akhir
                     </a>

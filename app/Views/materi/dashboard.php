@@ -13,7 +13,7 @@
                 <div class="bg-white/80 backdrop-blur-md px-20 py-6 rounded-3xl shadow-md">
                     <h1 class="text-3xl md:text-5xl font-bold text-[#2d2f6f]">belajar hijaiyah</h1>
                 </div>
-                <a href="<?= base_url('siswa/home') ?>"
+                <a href="<?= base_url('materi/home') ?>"
                     class="bg-[#f3e9f5] text-[#2d2f6f] text-2xl font-bold px-14 py-4 rounded-2xl border-2 border-[#2d2f6f] hover:bg-[#e0d6ec] transition-all">
                     Mulai
                 </a>

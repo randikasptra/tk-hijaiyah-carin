@@ -16,8 +16,15 @@ class Auth extends Controller
     {
         $session = session();
         $userModel = new UserModel();
-        $email = $this->request->getPost('email');
+
+        $email = trim($this->request->getPost('email'));
         $password = $this->request->getPost('password');
+
+        // Validasi sederhana
+        if (empty($email) || empty($password)) {
+            $session->setFlashdata('error', 'Email dan password wajib diisi.');
+            return redirect()->to('/login')->withInput();
+        }
 
         $user = $userModel->where('email', $email)->first();
 
@@ -31,22 +38,22 @@ class Auth extends Controller
                 'logged_in'  => true
             ]);
 
-            // Redirect berdasarkan role
+            // Redirect berdasarkan role yang valid (hanya admin & guru)
             switch ($user['role']) {
                 case 'admin':
                     return redirect()->to('/admin');
                 case 'guru':
                     return redirect()->to('/guru');
-                case 'siswa':
-                    return redirect()->to('/siswa');
                 default:
+                    // Role tidak valid
                     $session->setFlashdata('error', 'Role tidak dikenali.');
+                    session()->destroy();
                     return redirect()->to('/login');
             }
         } else {
             // Gagal login
             $session->setFlashdata('error', 'Email atau password salah');
-            return redirect()->to('/login');
+            return redirect()->to('/login')->withInput();
         }
     }
 

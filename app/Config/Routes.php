@@ -19,31 +19,27 @@ $routes->get('/logout', 'Auth::logout');
 // ==============================
 $routes->get('/admin', 'Admin::index');
 $routes->get('/guru', 'Guru::index');
-$routes->get('/siswa', 'Siswa::index');
-$routes->get('/dashboard', 'Dashboard::index'); // Optional umum
 
 // ==============================
-// 📚 SISWA - HALAMAN BELAJAR
+// 📚 MATERI ROUTES
 // ==============================
-$routes->get('/siswa/home', 'Siswa::home');
-$routes->get('/siswa/mengenal', 'Siswa::mengenal');
-$routes->get('/siswa/menghafal', 'Siswa::menghafal');
+$routes->get('/materi/dashboard', 'Materi::home');
+$routes->get('/materi/home', 'Materi::home');
+$routes->get('/materi/mengenal', 'Materi::mengenal');
+$routes->get('/materi/menghafal', 'Materi::menghafal');
+$routes->get('/materi/game', 'Materi::game');
 
 // ==============================
-// 🎮 GAME ROUTES
+// 🎮 GAME ROUTES - DI BAWAH PREFIX /materi/game
 // ==============================
-// Game huruf hijaiyah
-$routes->get('/siswa/game', 'Siswa::game');
-$routes->get('/siswa/game/level-huruf/(:num)', 'Game::levelHuruf/$1');
-$routes->post('/siswa/game/level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
-
-// Game harakat hijaiyah
-$routes->get('/siswa/game/start-harakat', 'Game::startHarakat');
-$routes->get('/siswa/game/level-harakat/(:segment)', 'Game::levelHarakat/$1');
-$routes->post('/siswa/game/level-harakat', 'Game::checkLevelHarakat');
-
-// Game selesai
-$routes->get('/siswa/game/selesai', 'Game::selesai');
+$routes->group('materi/game', function($routes) {
+    $routes->get('level-huruf/(:num)', 'Game::levelHuruf/$1');
+    $routes->post('level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
+    $routes->get('start-harakat', 'Game::startHarakat');
+    $routes->get('level-harakat/(:segment)', 'Game::levelHarakat/$1');
+    $routes->post('level-harakat', 'Game::checkLevelHarakat');
+    $routes->get('selesai', 'Game::selesai');
+});
 
 // ==============================
 // 🛠️ ADMIN - MANAJEMEN USER
@@ -54,4 +50,3 @@ $routes->post('/admin/user/tambah', 'Admin::simpanUser');
 $routes->get('/admin/user/edit/(:num)', 'Admin::editUser/$1');
 $routes->post('/admin/user/edit/(:num)', 'Admin::updateUser/$1');
 $routes->get('/admin/user/hapus/(:num)', 'Admin::hapusUser/$1');
-

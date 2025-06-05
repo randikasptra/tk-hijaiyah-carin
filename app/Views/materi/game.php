@@ -194,7 +194,7 @@
 
 
 <!-- Tombol Kembali -->
-<a href="<?= base_url('/siswa/home') ?>" class="btn-back">
+<a href="<?= base_url('/materi/home') ?>" class="btn-back">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
@@ -220,18 +220,18 @@
         <h1>🎮 Game Hijaiyah</h1>
 
         <div class="levels-container">
-            <a href="<?= base_url('siswa/game/level-huruf/0') ?>"
+            <a href="<?= base_url('materi/game/level-huruf/0') ?>"
                 class="level-card bg-gradient-to-r from-purple-500 to-fuchsia-500 pulse">
                 ✨ Tebak Huruf Hijaiyah (Iqro 1)
             </a>
 
-            <a href="<?= base_url('siswa/game/start-harakat') ?>"
+            <a href="<?= base_url('materi/game/start-harakat') ?>"
                 class="level-card bg-gradient-to-r from-blue-500 to-cyan-400">
                 🌟 Tebak Harakat Hijaiyah
             </a>
         </div>
 
-        <a href="<?= base_url('siswa') ?>" class="back-dashboard">
+        <a href="<?= base_url('materi/home') ?>" class="back-dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon-arrow-left" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>

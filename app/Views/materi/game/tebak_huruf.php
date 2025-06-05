@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- Tombol Kembali -->
-<a href="<?= base_url('/siswa/game') ?>"
+<a href="<?= base_url('/materi/game') ?>"
     class="absolute top-4 left-4 bg-white/80 hover:bg-white text-purple-700 font-bold py-2 px-4 rounded-full shadow-md flex items-center transition transform hover:scale-105 z-50
            sm:top-6 sm:left-6 sm:py-3 sm:px-5 sm:text-base">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +67,7 @@
         <img src="<?= $imgSrc ?>" alt="<?= $hurufDbNama ?>" class="w-32 h-32 sm:w-40 sm:h-40 mx-auto object-contain">
 
         <!-- ✅ Form Jawaban -->
-        <form action="<?= base_url('siswa/game/level-huruf/' . $index) ?>" method="post" class="space-y-6">
+        <form action="<?= base_url('materi/game/level-huruf/' . $index) ?>" method="post" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <?php foreach ($pilihan as $p): ?>
                     <button type="submit" name="jawaban" value="<?= $p ?>"
@@ -93,7 +93,7 @@
 
             <!-- ✅ Tombol Dashboard -->
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
-                <a href="<?= base_url('/siswa') ?>"
+                <a href="<?= base_url('/materi') ?>"
                     class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105
                            sm:py-3 sm:px-6 sm:text-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

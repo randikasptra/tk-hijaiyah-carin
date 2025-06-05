@@ -24,12 +24,12 @@
             <div class="flex-shrink-0">
                 <div
                     class="w-24 h-24 bg-green-300 rounded-full flex items-center justify-center text-4xl font-bold text-green-900 select-none shadow-inner">
-                    <?= strtoupper(substr(session()->get('user_name'), 0, 2)) ?>
+                    <?= strtoupper(substr($user_name, 0, 2)) ?>
                 </div>
             </div>
             <div>
                 <p class="text-lg md:text-xl text-green-900 font-semibold">Halo, <span
-                        class="underline decoration-green-600 decoration-2"><?= session()->get('user_name') ?></span>!
+                        class="underline decoration-green-600 decoration-2"><?= esc($user_name) ?></span>!
                 </p>
                 <p class="mt-1 text-green-700">Kamu login sebagai <strong>Guru</strong>.</p>
                 <p class="mt-3 text-sm text-green-600 max-w-md">Selamat mengajar dan semoga hari ini menyenangkan!
@@ -46,7 +46,7 @@
                 <p class="text-green-200 mt-1 text-center text-sm">Kelola dan tambahkan materi yang diajarkan</p>
             </a>
 
-            <a href="<?= base_url('guru/game') ?>"
+            <a href="<?= base_url('materi/dashboard') ?>"
                 class="bg-gradient-to-tr from-teal-500 to-cyan-600 text-white rounded-3xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-pointer">
                 <i data-feather="play-circle" class="w-10 h-10 mb-3"></i>
                 <span class="font-bold text-lg">Game Interaktif</span>
