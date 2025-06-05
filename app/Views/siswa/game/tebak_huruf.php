@@ -16,16 +16,45 @@
         <h1 class="text-3xl md:text-4xl font-extrabold text-purple-800">Tebak Huruf Hijaiyah</h1>
 
         <?php
-        // AMAN: Samakan dengan nama file gambar, tanpa angka dan kapital disesuaikan
-        $hurufNama = ucfirst(strtolower($huruf['nama']));
-        $hurufNama = str_replace([' ', '-', '_'], '', $hurufNama); // jaga-jaga
-        $imgSrc = base_url("assets/img/game_huruf/{$hurufNama}.png");
+        $namaGambarMap = [
+            'Alif' => 'Alif.png',
+            'Ba'   => 'Ba.png',
+            'Ta'   => 'Ta.png',
+            'Tsa'  => 'Tsa.png',
+            'Jim'  => 'Jim.png',
+            'Ha'   => 'Ha.png',
+            'Kha'  => 'Kha.png',
+            'Dal'  => 'Dal.png',
+            'Dzal' => 'Dzal.png',
+            'Ro'   => 'Ro.png',  
+            'Zai'   => 'Zai.png',
+            'Sin'  => 'Sin.png',
+            'Syin' => 'Syin.png',
+            'Shod' => 'Shod.png',
+            'Dhod' => 'Dhod.png',
+            'Tho'   => 'Tho.png',
+            'Dzho'  => 'Dzho.png',
+            'Ain'  => 'Ain.png',
+            'Ghoin' => 'Ghoin.png',
+            'Fa'   => 'Fa.png',
+            'Qof'  => 'Qof.png',
+            'Kaf'  => 'Kaf.png',
+            'Lam'  => 'Lam.png',
+            'Mim'  => 'Mim.png',
+            'Nun'  => 'Nun.png',
+            'Wau' => 'Wau.png',
+            'Ha2'  => 'Ha2.png', 
+            'Hamzah'  => 'Hamzah.png', 
+            'Ya'   => 'Ya.png',
+        ];
+
+        $hurufDbNama = $huruf['nama'] ?? '';
+
+        $gambarFile = $namaGambarMap[$hurufDbNama] ?? 'default.png'; // fallback kalau tidak ditemukan
+
+        $imgSrc = base_url("assets/img/game_huruf/" . $gambarFile);
         ?>
-        <img src="<?= $imgSrc ?>" alt="<?= $hurufNama ?>" class="w-40 h-40 mx-auto object-contain">
-
-
-        <small class="text-xs text-gray-500"><?= $imgSrc ?></small>
-        <img src="<?= $imgSrc ?>" alt="<?= $hurufNama ?>" class="w-40 h-40 mx-auto object-contain">
+        <img src="<?= $imgSrc ?>" alt="<?= $hurufDbNama ?>" class="w-40 h-40 mx-auto object-contain">
 
 
         <!-- ✅ Form Jawaban -->
