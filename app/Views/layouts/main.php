@@ -32,6 +32,14 @@
         <?= $this->renderSection('content') ?>
     </main>
 
+    <!-- 🔓 Tombol Logout -->
+    <div class="fixed top-4 right-4 z-50">
+        <a href="<?= base_url('logout') ?>" class="bg-white/70 text-black px-4 py-2 rounded-xl shadow-xl hover:bg-white/90 transition">
+            Logout
+        </a>
+    </div>
+
+
     <!-- 🔧 Script Backsound & Volume -->
     <script>
         const backsound = document.getElementById("backsound");
@@ -68,37 +76,39 @@
     <!-- 🧠 Script Tambahan dari Halaman -->
     <?= $this->renderSection('script') ?>
 
-   // main.php
+    // main.php
 
-<script>
-    const path = window.location.pathname;
+    <script>
+        const path = window.location.pathname;
 
-    let welcomeFile = "";
-    let sessionKey = "";
+        let welcomeFile = "";
+        let sessionKey = "";
 
-    if (path.includes('/siswa/mengenal')) {
-        welcomeFile = "MENGENAL.mp3";
-        sessionKey = "welcome_played_mengenal";
-    } else if (path.includes('/siswa/menghafal')) {
-        welcomeFile = "MK_HIJAIYAH.mp3";
-        sessionKey = "welcome_played_hafal";
-    }
+        if (path.includes('/siswa/mengenal')) {
+            welcomeFile = "MENGENAL.mp3";
+            sessionKey = "welcome_played_mengenal";
+        } else if (path.includes('/siswa/menghafal')) {
+            welcomeFile = "MK_HIJAIYAH.mp3";
+            sessionKey = "welcome_played_hafal";
+        }
 
-    if (welcomeFile && sessionKey) {
-        const welcome = new Audio("<?= base_url('sound/') ?>" + welcomeFile);
-        welcome.volume = 1;
+        if (welcomeFile && sessionKey) {
+            const welcome = new Audio("<?= base_url('sound/') ?>" + welcomeFile);
+            welcome.volume = 1;
 
-        window.addEventListener("DOMContentLoaded", () => {
-            if (!sessionStorage.getItem(sessionKey)) {
-                welcome.play().then(() => {
-                    sessionStorage.setItem(sessionKey, "true");
-                }).catch(() => {
-                    window.addEventListener("click", () => {
-                        welcome.play();
+            window.addEventListener("DOMContentLoaded", () => {
+                if (!sessionStorage.getItem(sessionKey)) {
+                    welcome.play().then(() => {
                         sessionStorage.setItem(sessionKey, "true");
-                    }, { once: true });
-                });
-            }
-        });
-    }
-</script>
+                    }).catch(() => {
+                        window.addEventListener("click", () => {
+                            welcome.play();
+                            sessionStorage.setItem(sessionKey, "true");
+                        }, {
+                            once: true
+                        });
+                    });
+                }
+            });
+        }
+    </script>
