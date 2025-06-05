@@ -15,16 +15,17 @@
     <div class="bg-white/80 backdrop-blur-md p-10 rounded-3xl shadow-xl text-center max-w-xl w-full space-y-8">
         <h1 class="text-3xl md:text-4xl font-extrabold text-purple-800">Tebak Huruf Hijaiyah</h1>
 
-     <?php
-$imgIndex = $index + 1;
-$hurufNama = ucfirst(strtolower($huruf['nama'])); // Samakan kapitalisasi
-$hurufNama = str_replace([' ', '-', '_'], '', $hurufNama); // Hilangkan spasi/dash
-$imgSrc = base_url("assets/img/game_huruf/{$imgIndex}.{$hurufNama}.png");
-?>
+        <?php
+        // AMAN: Samakan dengan nama file gambar, tanpa angka dan kapital disesuaikan
+        $hurufNama = ucfirst(strtolower($huruf['nama']));
+        $hurufNama = str_replace([' ', '-', '_'], '', $hurufNama); // jaga-jaga
+        $imgSrc = base_url("assets/img/game_huruf/{$hurufNama}.png");
+        ?>
+        <img src="<?= $imgSrc ?>" alt="<?= $hurufNama ?>" class="w-40 h-40 mx-auto object-contain">
 
 
-       <small class="text-xs text-gray-500"><?= $imgSrc ?></small>
-<img src="<?= $imgSrc ?>" alt="<?= $hurufNama ?>" class="w-40 h-40 mx-auto object-contain">
+        <small class="text-xs text-gray-500"><?= $imgSrc ?></small>
+        <img src="<?= $imgSrc ?>" alt="<?= $hurufNama ?>" class="w-40 h-40 mx-auto object-contain">
 
 
         <!-- ✅ Form Jawaban -->
@@ -68,7 +69,7 @@ $imgSrc = base_url("assets/img/game_huruf/{$imgIndex}.{$hurufNama}.png");
 
 <?php if (isset($status) && in_array($status, ['benar', 'salah'])): ?>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const audio = new Audio("<?= base_url('sound/' . ($status === 'benar' ? 'benar.mp3' : 'salah.mp3')) ?>");
             audio.volume = 1;
             audio.play().catch(err => console.warn("Gagal memutar suara:", err));
