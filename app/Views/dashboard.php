@@ -106,7 +106,7 @@
               class="absolute bottom-10 right-4 w-20 sm:w-40 md:w-52 pointer-events-none select-none z-0" />
 
           <!-- Tombol Kembali dengan Icon -->
-          <div class="text-center mt-4">
+          <div class="text-center mt-4 ">
               <a href="<?= base_url('siswa/home') ?>" class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
                   <!-- Heroicon Left Arrow -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
