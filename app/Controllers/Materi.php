@@ -53,6 +53,7 @@ class Materi extends BaseController
         return view('materi/harakat_hijaiyah', [
             'pageTitle' => 'Game Interaktif',
             'backsound' => 'Backsoundd.mp3'
+            
         ]);
     }
 }

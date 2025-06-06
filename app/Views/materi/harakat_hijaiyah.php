@@ -1,4 +1,6 @@
 <?php $this->extend('layouts/main') ?>
+
+
 <?= $this->section('content') ?>
 <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-6 relative"
     style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
@@ -100,31 +102,31 @@
         "Hamzah": ["Hamzah", "Hamzih", "Hamzuh"]
     };
 
-   function tampilkanHarakat(huruf) {
-    const container = document.getElementById('harakatDisplay');
-    container.innerHTML = '';
+    function tampilkanHarakat(huruf) {
+        const container = document.getElementById('harakatDisplay');
+        container.innerHTML = '';
 
-    // Main huruf sound
-    const hurufAudio = new Audio("<?= base_url('assets/audio/hijaiyah_huruf/') ?>" + huruf + ".mp3");
-    hurufAudio.play();
+        // Main huruf sound
+        const hurufAudio = new Audio("<?= base_url('assets/audio/hijaiyah_huruf/') ?>" + huruf + ".mp3");
+        hurufAudio.play();
 
-    // Tampilkan dan aktifkan suara untuk harakat
-    if (harakatMap[huruf]) {
-        harakatMap[huruf].forEach(h => {
-            const img = document.createElement('img');
-            img.src = "<?= base_url('assets/img/harakat_huruf/') ?>" + h + ".png";
-            img.alt = h;
-            img.className = "w-20 h-20 object-contain bg-white p-2 rounded-xl shadow-md hover:scale-105 transition cursor-pointer";
+        // Tampilkan dan aktifkan suara untuk harakat
+        if (harakatMap[huruf]) {
+            harakatMap[huruf].forEach(h => {
+                const img = document.createElement('img');
+                img.src = "<?= base_url('assets/img/harakat_huruf/') ?>" + h + ".png";
+                img.alt = h;
+                img.className = "w-20 h-20 object-contain bg-white p-2 rounded-xl shadow-md hover:scale-105 transition cursor-pointer";
 
-            // Tambah suara saat klik harakat
-            img.onclick = function () {
-                const harakatAudio = new Audio("<?= base_url('assets/audio/harakat_huruf/') ?>" + h + ".mp3");
-                harakatAudio.play();
-            };
+                // Tambah suara saat klik harakat
+                img.onclick = function() {
+                    const harakatAudio = new Audio("<?= base_url('assets/audio/harakat_huruf/') ?>" + h + ".mp3");
+                    harakatAudio.play();
+                };
 
-            container.appendChild(img);
-        });
+                container.appendChild(img);
+            });
+        }
     }
-}
 </script>
 <?= $this->endSection() ?>
