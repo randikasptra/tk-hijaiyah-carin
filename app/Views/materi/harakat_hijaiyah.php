@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-6 relative"
     style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
-    
+
     <!-- Tombol kembali -->
     <a href="<?= base_url('/siswa/mengenal') ?>"
         class="absolute top-4 left-4 bg-white/80 hover:bg-white text-purple-700 font-bold py-2 px-4 rounded-full shadow-md flex items-center transition transform hover:scale-105 z-50">
@@ -21,21 +21,48 @@
         </div>
 
         <!-- Kolom kanan -->
-       <div class="col-span-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4 items-start justify-center" dir="rtl">
-    <?php
-    $hurufDasar = [
-        'A', 'Ba', 'Ta', 'Tsa', 'Ja', 'Kha', 'Kho', 'Da', 'Dza', 'Ro', 'Za', 'San','Sya', 'Shad', 'Dha', 'Tho', 'Dzha',
-        'Ain', 'Gha', 'Fa', 'Qo', 'Ka',  'La', 'Ma', 'Na', 'Wa', 'Hamzah', 'Ha', 'Ya'
-    ];
-    ?>
-    <?php foreach ($hurufDasar as $huruf): ?>
-        <button onclick="tampilkanHarakat('<?= $huruf ?>')"
-            class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition transform hover:scale-105">
-            <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
-                alt="<?= $huruf ?>" class="w-16 h-16 object-contain mx-auto">
-        </button>
-    <?php endforeach; ?>
-</div>
+        <div class="col-span-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4 items-start justify-center" dir="rtl">
+            <?php
+            $hurufDasar = [
+                'A',
+                'Ba',
+                'Ta',
+                'Tsa',
+                'Ja',
+                'Kha',
+                'Kho',
+                'Da',
+                'Dza',
+                'Ro',
+                'Za',
+                'San',
+                'Sya',
+                'Shad',
+                'Dha',
+                'Tho',
+                'Dzha',
+                'Ain',
+                'Gha',
+                'Fa',
+                'Qo',
+                'Ka',
+                'La',
+                'Ma',
+                'Na',
+                'Wa',
+                'Hamzah',
+                'Ha',
+                'Ya'
+            ];
+            ?>
+            <?php foreach ($hurufDasar as $huruf): ?>
+                <button onclick="tampilkanHarakat('<?= $huruf ?>')"
+                    class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition transform hover:scale-105">
+                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
+                        alt="<?= $huruf ?>" class="w-16 h-16 object-contain mx-auto">
+                </button>
+            <?php endforeach; ?>
+        </div>
 
     </div>
 </div>
@@ -70,23 +97,34 @@
         "Ha": ["Ha", "Hi", "Hu"],
         "Wa": ["Wa", "Wi", "Wu"],
         "Ya": ["Ya", "Yi", "Yu"],
-        "Ha": ["Ha", "Hi", "Hu"],
         "Hamzah": ["Hamzah", "Hamzih", "Hamzuh"]
     };
 
-    function tampilkanHarakat(huruf) {
-        const container = document.getElementById('harakatDisplay');
-        container.innerHTML = '';
+   function tampilkanHarakat(huruf) {
+    const container = document.getElementById('harakatDisplay');
+    container.innerHTML = '';
 
-        if (harakatMap[huruf]) {
-            harakatMap[huruf].forEach(h => {
-                const img = document.createElement('img');
-                img.src = "<?= base_url('assets/img/harakat_huruf/') ?>" + h + ".png";
-                img.alt = h;
-                img.className = "w-20 h-20 object-contain bg-white p-2 rounded-xl shadow-md hover:scale-105 transition";
-                container.appendChild(img);
-            });
-        }
+    // Main huruf sound
+    const hurufAudio = new Audio("<?= base_url('assets/audio/hijaiyah_huruf/') ?>" + huruf + ".mp3");
+    hurufAudio.play();
+
+    // Tampilkan dan aktifkan suara untuk harakat
+    if (harakatMap[huruf]) {
+        harakatMap[huruf].forEach(h => {
+            const img = document.createElement('img');
+            img.src = "<?= base_url('assets/img/harakat_huruf/') ?>" + h + ".png";
+            img.alt = h;
+            img.className = "w-20 h-20 object-contain bg-white p-2 rounded-xl shadow-md hover:scale-105 transition cursor-pointer";
+
+            // Tambah suara saat klik harakat
+            img.onclick = function () {
+                const harakatAudio = new Audio("<?= base_url('assets/audio/harakat_huruf/') ?>" + h + ".mp3");
+                harakatAudio.play();
+            };
+
+            container.appendChild(img);
+        });
     }
+}
 </script>
 <?= $this->endSection() ?>
