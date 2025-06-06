@@ -1,93 +1,91 @@
-<?= $this->extend('layouts/main') ?>
-
+<?php $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<div class="min-h-screen bg-cover bg-center p-6" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
-    <div class="bg-white/80 backdrop-blur-lg p-6 rounded-3xl shadow-xl max-w-5xl mx-auto space-y-8">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-purple-800 text-center">Belajar Harakat Huruf Hijaiyah</h1>
+<div class="min-h-screen bg-cover bg-center flex items-center justify-center p-6 relative"
+    style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+    
+    <!-- Tombol kembali -->
+    <a href="<?= base_url('/siswa/mengenal') ?>"
+        class="absolute top-4 left-4 bg-white/80 hover:bg-white text-purple-700 font-bold py-2 px-4 rounded-full shadow-md flex items-center transition transform hover:scale-105 z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Kembali
+    </a>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="w-full max-w-6xl bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Kolom kiri -->
+        <div class="col-span-1 flex flex-col items-center justify-between">
+            <div id="harakatDisplay" class="flex justify-center gap-3 mb-4"></div>
+            <img src="<?= base_url('assets/img/anak-laki.png') ?>" alt="Anak" class="w-44 h-auto">
+        </div>
+
+        <!-- Kolom kanan -->
+        <div class="col-span-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4 items-start justify-center">
             <?php
-            $harakatList = [
-                'Ba',
-                'Bi',
-                'bu',
-                'ta',
-                'ti',
-                'tu',
-                'tsa',
-                'tsi',
-                'tsu',
-                'ja',
-                'ji',
-                'ju',
-                'kha',
-                'khi',
-                'khu',
-                'da',
-                'di',
-                'du',
-                'dza',
-                'dzi',
-                'dzu',
-                'ro',
-                'ri',
-                'ru',
-                'za',
-                'zi',
-                'zu',
-                'sha',
-                'shi',
-                'shu',
-                'dha',
-                'dhi',
-                'dhu',
-                'tho',
-                'thi',
-                'thu',
-                'dzha',
-                'dzhi',
-                'dzhu',
-                'fa',
-                'fi',
-                'fu',
-                'qa',
-                'qi',
-                'qu',
-                'ka',
-                'ki',
-                'ku',
-                'la',
-                'li',
-                'lu',
-                'ma',
-                'mi',
-                'mu',
-                'na',
-                'ni',
-                'nu',
-                'ha',
-                'hi',
-                'hu',
-                'wa',
-                'wi',
-                'wu',
-                'ya',
-                'yi',
-                'yu',
-                'hamzah',
-                'hamzih',
-                'hamzuh'
+            $hurufDasar = [
+                'A', 'Ba', 'Ta', 'Tsa', 'Ja', 'Kha', 'Kho', 'Da', 'Dza', 'Ro', 'Za', 'San','Sya', 'Shad', 'Dha', 'Tho', 'Dzha',
+                'Ain', 'Gha', 'Fa', 'Qo', 'Ka',  'La', 'Ma', 'Na', 'Wa', 'Hamzah', 'Ha', 'Ya'
             ];
-
-            foreach ($harakatList as $item):
             ?>
-                <div class="text-center">
-                    <img src="<?= base_url('assets/img/harakat_huruf/' . $item . '.png') ?>" alt="<?= strtoupper($item) ?>"
-                        class="w-20 h-20 mx-auto object-contain transition hover:scale-110 duration-300">
-                    <p class="text-purple-700 font-bold mt-2 uppercase"><?= $item ?></p>
-                </div>
+            <?php foreach ($hurufDasar as $huruf): ?>
+                <button onclick="tampilkanHarakat('<?= $huruf ?>')"
+                    class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition transform hover:scale-105">
+                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
+                        alt="<?= $huruf ?>" class="w-16 h-16 object-contain mx-auto">
+                </button>
             <?php endforeach; ?>
         </div>
     </div>
 </div>
+
+<script>
+    const harakatMap = {
+        "A": ["A", "I", "U"],
+        "Ba": ["Ba", "Bi", "Bu"],
+        "Ta": ["Ta", "Ti", "Tu"],
+        "Tsa": ["Tsa", "Tsi", "Tsu"],
+        "Ja": ["Ja", "Ji", "Ju"],
+        "Kha": ["Kha", "Khi", "Khu"],
+        "Kho": ["Kho", "Khii", "Khuu"],
+        "Da": ["Da", "Di", "Du"],
+        "Dza": ["Dza", "Dzi", "Dzu"],
+        "Ro": ["Ro", "Ri", "Ru"],
+        "Za": ["Za", "Zi", "Zu"],
+        "San": ["San", "Sin", "Sun"],
+        "Sya": ["Sya", "Syi", "Syu"],
+        "Shad": ["Shad", "Shid", "Shud"],
+        "Dha": ["Dha", "Dhi", "Dhu"],
+        "Tho": ["Tho", "Thi", "Thu"],
+        "Dzha": ["Dzha", "Dzhi", "Dzhu"],
+        "Ain": ["Ain", "Iin", "Uin"],
+        "Gha": ["Gha", "Ghi", "Ghu"],
+        "Fa": ["Fa", "Fi", "Fu"],
+        "Qo": ["Qo", "Qi", "Qu"],
+        "Ka": ["Ka", "Ki", "Ku"],
+        "La": ["La", "Li", "Lu"],
+        "Ma": ["Ma", "Mi", "Mu"],
+        "Na": ["Na", "Ni", "Nu"],
+        "Ha": ["Ha", "Hi", "Hu"],
+        "Wa": ["Wa", "Wi", "Wu"],
+        "Ya": ["Ya", "Yi", "Yu"],
+        "Ha": ["Ha", "Hi", "Hu"],
+        "Hamzah": ["Hamzah", "Hamzih", "Hamzuh"]
+    };
+
+    function tampilkanHarakat(huruf) {
+        const container = document.getElementById('harakatDisplay');
+        container.innerHTML = '';
+
+        if (harakatMap[huruf]) {
+            harakatMap[huruf].forEach(h => {
+                const img = document.createElement('img');
+                img.src = "<?= base_url('assets/img/harakat_huruf/') ?>" + h + ".png";
+                img.alt = h;
+                img.className = "w-20 h-20 object-contain bg-white p-2 rounded-xl shadow-md hover:scale-105 transition";
+                container.appendChild(img);
+            });
+        }
+    }
+</script>
 <?= $this->endSection() ?>
