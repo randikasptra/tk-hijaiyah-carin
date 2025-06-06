@@ -28,6 +28,7 @@ $routes->get('/materi/home', 'Materi::home');
 $routes->get('/materi/mengenal', 'Materi::mengenal');
 $routes->get('/materi/menghafal', 'Materi::menghafal');
 $routes->get('/materi/game', 'Materi::game');
+$routes->get('/materi/harakat_hijaiyah', 'Materi::harakat');
 
 // ==============================
 // 🎮 GAME ROUTES - DI BAWAH PREFIX /materi/game
