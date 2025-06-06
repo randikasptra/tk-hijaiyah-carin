@@ -17,25 +17,26 @@
         <!-- Kolom kiri -->
         <div class="col-span-1 flex flex-col items-center justify-between">
             <div id="harakatDisplay" class="flex justify-center gap-3 mb-4"></div>
-            <img src="<?= base_url('assets/img/anak-laki.png') ?>" alt="Anak" class="w-44 h-auto">
+            <img src="<?= base_url('assets/img/karakter-anak.jpg') ?>" alt="Anak" class="w-44 h-auto">
         </div>
 
         <!-- Kolom kanan -->
-        <div class="col-span-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4 items-start justify-center">
-            <?php
-            $hurufDasar = [
-                'A', 'Ba', 'Ta', 'Tsa', 'Ja', 'Kha', 'Kho', 'Da', 'Dza', 'Ro', 'Za', 'San','Sya', 'Shad', 'Dha', 'Tho', 'Dzha',
-                'Ain', 'Gha', 'Fa', 'Qo', 'Ka',  'La', 'Ma', 'Na', 'Wa', 'Hamzah', 'Ha', 'Ya'
-            ];
-            ?>
-            <?php foreach ($hurufDasar as $huruf): ?>
-                <button onclick="tampilkanHarakat('<?= $huruf ?>')"
-                    class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition transform hover:scale-105">
-                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
-                        alt="<?= $huruf ?>" class="w-16 h-16 object-contain mx-auto">
-                </button>
-            <?php endforeach; ?>
-        </div>
+       <div class="col-span-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4 items-start justify-center" dir="rtl">
+    <?php
+    $hurufDasar = [
+        'A', 'Ba', 'Ta', 'Tsa', 'Ja', 'Kha', 'Kho', 'Da', 'Dza', 'Ro', 'Za', 'San','Sya', 'Shad', 'Dha', 'Tho', 'Dzha',
+        'Ain', 'Gha', 'Fa', 'Qo', 'Ka',  'La', 'Ma', 'Na', 'Wa', 'Hamzah', 'Ha', 'Ya'
+    ];
+    ?>
+    <?php foreach ($hurufDasar as $huruf): ?>
+        <button onclick="tampilkanHarakat('<?= $huruf ?>')"
+            class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition transform hover:scale-105">
+            <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
+                alt="<?= $huruf ?>" class="w-16 h-16 object-contain mx-auto">
+        </button>
+    <?php endforeach; ?>
+</div>
+
     </div>
 </div>
 
