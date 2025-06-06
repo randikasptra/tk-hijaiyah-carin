@@ -43,9 +43,9 @@
 
             
             <div class="flex justify-between items-center mb-6 mt-10">
-                <a href="<?= base_url('siswa/home') ?>" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full shadow transition">⬅️ Kembali</a>
+                <a href="<?= base_url('materi/home') ?>" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full shadow transition">⬅️ Kembali</a>
 
-                <a href="<?= base_url('materi/game/harakat_hijaiyah') ?>" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow transition">
+                <a href="<?= base_url('materi/harakat_hijaiyah') ?>" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow transition">
                     🎯 Belajar Harakat
                 </a>
             </div>
