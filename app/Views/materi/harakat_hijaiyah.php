@@ -8,8 +8,8 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             <?php
             $harakatList = [
-                'ba',
-                'bi',
+                'Ba',
+                'Bi',
                 'bu',
                 'ta',
                 'ti',

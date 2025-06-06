@@ -48,7 +48,7 @@ class Materi extends BaseController
             'backsound' => 'Backsoundd.mp3'
         ]);
     }
-    public function Materi()
+    public function harakat()
     {
         return view('materi/harakat_hijaiyah', [
             'pageTitle' => 'Game Interaktif',
