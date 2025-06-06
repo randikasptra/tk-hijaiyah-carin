@@ -41,13 +41,12 @@
                 </div>
             </div>
 
-            <!-- Tombol Kembali -->
-            <div class="mt-10 text-center">
-                <a href="<?= base_url('materi/home') ?>" class="inline-flex items-center bg-pink-400 hover:bg-pink-500 text-white font-semibold py-2 px-6 rounded-full shadow-md transition transform hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Kembali
+            
+            <div class="flex justify-between items-center mb-6 mt-10">
+                <a href="<?= base_url('siswa/home') ?>" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full shadow transition">⬅️ Kembali</a>
+
+                <a href="<?= base_url('materi/game/harakat_hijaiyah') ?>" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow transition">
+                    🎯 Belajar Harakat
                 </a>
             </div>
         </div>
