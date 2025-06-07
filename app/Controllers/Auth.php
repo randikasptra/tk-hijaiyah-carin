@@ -7,10 +7,29 @@ use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
-    public function login()
-    {
-        return view('auth/login');
+ public function login()
+{
+    if (session()->get('logged_in')) {
+        switch (session()->get('user_role')) {
+            case 'admin':
+                return redirect()->to('/admin');
+            case 'guru':
+                return redirect()->to('/guru');
+            default:
+                return redirect()->to('/');
+        }
     }
+
+    // Set header agar halaman tidak disimpan di cache
+    $this->response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    $this->response->setHeader('Pragma', 'no-cache');
+    $this->response->setHeader('Expires', '0');
+
+    return view('auth/login');
+}
+
+
+
 
     public function doLogin()
     {

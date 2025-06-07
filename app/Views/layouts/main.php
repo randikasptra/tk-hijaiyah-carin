@@ -23,7 +23,7 @@
 
     <!-- ⬅️ Tombol Kembali ke Dashboard Guru -->
     <div class="fixed top-4 left-4 z-50">
-        <a href="<?= base_url('guru') ?>"
+        <a href="<?= base_url('materi/dashboard') ?>"
            class="flex items-center gap-2 px-4 py-2 rounded-full shadow-md bg-pink-200 text-pink-800 font-semibold transition hover:bg-pink-300 hover:scale-105 hover:shadow-lg">
             🏠 Kembali
         </a>
