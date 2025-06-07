@@ -1,77 +1,50 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<div class="min-h-screen bg-cover bg-center flex items-center justify-center"
-    style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+<div class="relative min-h-screen bg-cover bg-center flex items-center justify-center px-4 py-10"
+    style="background-image: url('<?= base_url('assets/img/game-1.png') ?>');">
 
-    <!-- Tombol Kembali -->
-    <a href="<?= base_url('materi/game') ?>"
-        class="absolute top-4 left-4 bg-white/80 hover:bg-white text-purple-700 font-bold py-2 px-4 rounded-full shadow-md flex items-center transition transform hover:scale-105 z-50">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Kembali
-    </a>
+    <!-- 🔊 Instruksi -->
+    <div class="absolute top-6 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full shadow-md text-center z-40">
+        <p class="text-lg font-bold text-purple-800">🎧 Di mana huruf <span id="targetHuruf" class="underline"><?= esc($benar) ?></span>?</p>
+    </div>
 
-    <div class="bg-white/80 backdrop-blur-md p-10 rounded-3xl shadow-xl text-center max-w-xl w-full space-y-8 z-10">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-purple-800">Tebak Harakat Hijaiyah</h1>
+    <!-- 👦 Gambar Anak -->
+    <div class="absolute left-4 bottom-4 z-30">
+        <img src="<?= base_url('assets/img/karakter-anak.jpg') ?>" alt="Karakter Anak" class="w-32 md:w-40 lg:w-52">
+    </div>
 
-        <!-- Gambar soal -->
-        <img src="<?= base_url('assets/img/huruf/' . $huruf . '.png') ?>" alt="<?= $huruf ?>"
-            class="w-40 h-40 mx-auto object-contain">
+    <!-- 📦 Container Pilihan Huruf -->
+    <div class="relative bg-white/70 backdrop-blur-md rounded-3xl shadow-lg max-w-4xl w-full h-[500px] p-4 overflow-hidden">
+        <?php
+        $pilihan = $pilihan ?? ['Ain', 'Lam', 'Tho'];
+        $benar = $benar ?? 'Ain';
+        $posisi = [
+            ['top' => '15%', 'left' => '25%'],
+            ['top' => '40%', 'left' => '65%'],
+            ['top' => '70%', 'left' => '40%'],
+        ];
+        ?>
 
-        <!-- Form pilihan -->
-        <form action="<?= base_url('materi/game/level-harakat') ?>" method="post" class="space-y-4">
-            <input type="hidden" name="huruf" value="<?= esc($huruf) ?>">
-            <input type="hidden" name="step" value="<?= $step ?>">
-            <div class="grid grid-cols-3 gap-4">
-                <?php foreach ($pilihan as $pil): ?>
-                    <button type="submit" name="jawaban" value="<?= $pil ?>"
-                        class="bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-full font-bold text-xl shadow">
-                        <?= strtoupper($pil) ?>
-                    </button>
-                <?php endforeach; ?>
-            </div>
-        </form>
-
-        <?php if ($status): ?>
-            <div class="flex flex-col items-center space-y-3">
-                <?php if ($status === 'benar'): ?>
-                    <img src="<?= base_url('assets/img/icon-benar.png') ?>" class="w-20 h-20 animate-bounce" alt="Benar">
-                    <div class="text-green-600 font-bold text-xl">Bagus!</div>
-                <?php else: ?>
-                    <img src="<?= base_url('assets/img/icon-salah.png') ?>" class="w-20 h-20 animate-pulse" alt="Salah">
-                    <div class="text-red-600 font-bold text-xl">Coba Lagi</div>
-                <?php endif; ?>
-
-                <?php if ($step < 5): ?>
-                     <a href="<?= base_url('/materi') ?>"
-                    class="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-5 rounded-full shadow-md transition transform hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 10l1.5 1.5L12 4l7.5 7.5L21 10M4 10v10a1 1 0 001 1h5m10-11v10a1 1 0 01-1 1h-5" />
-                    </svg>
-                    Dashboard
-                </a>
-                <?php else: ?>
-                    <a href="<?= base_url('materi/game/selesai') ?>"
-                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-full shadow transition font-semibold">
-                        Lihat Skor Akhir
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
+        <?php foreach ($pilihan as $i => $huruf): ?>
+            <form method="post" action="<?= base_url('siswa/game/tebak_harakat/') ?>">
+                <input type="hidden" name="jawaban" value="<?= esc($huruf) ?>">
+                <button type="submit" class="absolute hover:scale-110 transition-transform"
+                    style="top: <?= $posisi[$i]['top'] ?>; left: <?= $posisi[$i]['left'] ?>;">
+                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
+                        alt="<?= esc($huruf) ?>" class="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-xl rounded-full bg-white/80 p-1 hover:bg-green-100">
+                </button>
+            </form>
+        <?php endforeach; ?>
     </div>
 </div>
-<?= $this->endSection() ?>
 
-<?= $this->section('script') ?>
-<?php if ($status): ?>
+<!-- 🔊 Audio Instruksi -->
 <script>
-    const sound = new Audio("<?= base_url('sound/' . ($status === 'benar' ? 'benar.mp3' : 'salah.mp3')) ?>");
-    sound.play().catch(e => console.warn("Gagal play:", e));
+    document.addEventListener("DOMContentLoaded", () => {
+        const audio = new Audio("<?= base_url('sound/perintah_' . strtolower($benar) . '.mp3') ?>");
+        audio.play().catch(err => console.warn("Gagal play audio instruksi:", err));
+    });
 </script>
-<?php endif; ?>
+
 <?= $this->endSection() ?>
