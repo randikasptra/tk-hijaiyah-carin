@@ -84,71 +84,64 @@ class Game extends BaseController
 {
     $session = session();
 
-    // Jika awal permainan → generate 5 soal random
-    if ($step == 0 || !$session->has('game_harakat_soal')) {
-        $daftarHuruf = ['Alif', 'Ba', 'Ta', 'Tsa', 'Jim', 'Ha', 'Kha', 'Dal', 'Dzal', 'Ra', 'Zai', 'Sin', 'Syin', 'Shod', 'Dhod', 'Tho', 'Dzho', 'Ain', 'Ghoin', 'Fa', 'Qof', 'Kaf', 'Lam', 'Mim', 'Nun', 'Wau', 'Ha2', 'Hamzah', 'Ya'];
-        shuffle($daftarHuruf);
-        $soal = array_slice($daftarHuruf, 0, 5);
-        $session->set('game_harakat_soal', $soal);
-        $session->set('game_harakat_score', 0);
-    } else {
-        $soal = $session->get('game_harakat_soal');
+    // Soal tetap sesuai urutan suara
+    $soalTetap = ['Nun', 'Ba', 'Dal', 'Ro', 'Kho']; // 5 soal fix urutan
+
+    if (!isset($soalTetap[$step])) {
+        return redirect()->to('/materi/game/selesai');
     }
 
-    // Kalau soal sudah habis, redirect ke halaman selesai
-    if (!isset($soal[$step])) {
-        return redirect()->to('/siswa/game/selesai');
-    }
+    $benar = $soalTetap[$step];
 
-    $benar = $soal[$step];
+    // Distraktor manual
+    $opsiDistraktor = [
+        'Nun' => ['Mim', 'Ta'],
+        'Ba' => ['Ta', 'Tsa'],
+        'Dal' => ['Dzal', 'Ro'],
+        'Ro' => ['Zai', 'Dal'],
+        'Kho' => ['Kha', 'Ha'],
+    ];
 
-    // Buat pilihan acak
-    $pilihan = [$benar];
-    while (count($pilihan) < 3) {
-        $hurufLain = $daftarHuruf[array_rand($daftarHuruf)];
-        if (!in_array($hurufLain, $pilihan)) {
-            $pilihan[] = $hurufLain;
-        }
-    }
+    $pilihan = $opsiDistraktor[$benar] ?? [];
+    $pilihan[] = $benar;
     shuffle($pilihan);
 
-    return view('materi/game/tebak_harakat', [
-        'benar' => $benar,
-        'pilihan' => $pilihan,
-        'step' => $step
-    ]);
+    // Ganti background & suara berdasarkan step
+   $bgList = ['game-1.png', 'game-2.png', 'game-3.png', 'game-4.png', 'game-5.png'];
+$bgImage = $bgList[$step] ?? 'game-1.png';
+
+return view('materi/game/tebak_harakat', [
+    'step' => $step,
+    'benar' => $benar,
+    'pilihan' => $pilihan,
+    'bgImage' => $bgImage, // ⬅ ini penting!
+    'soundFile' => 'game-' . ($step + 1) . '.mp3'
+]);
 }
 
 
-    public function checkLevelHarakat()
-    {
-        $step = (int) $this->request->getPost('step');
-        $huruf = strtolower($this->request->getPost('huruf'));
-        $jawaban = strtolower($this->request->getPost('jawaban'));
-        $benar = $huruf . 'a';
-        $status = $jawaban === $benar ? 'benar' : 'salah';
+   public function checkLevelHarakat($step = 0)
+{
+    $jawaban = $this->request->getPost('jawaban');
+    $soalTetap = ['Nun', 'Ba', 'Dal', 'Ro', 'Kho'];
+    $benar = $soalTetap[$step] ?? null;
 
-        if ($status === 'benar') {
-            $score = session()->get('game_harakat_score') ?? 0;
-            session()->set('game_harakat_score', $score + 20);
-        }
+    $status = ($jawaban === $benar) ? 'benar' : 'salah';
 
-        $pilihan = [$huruf . 'a', $huruf . 'i', $huruf . 'u'];
-        shuffle($pilihan);
-
-        // ⛔️ Kalau sudah selesai
-        if ($step >= 4) {
-            return redirect()->to('/materi/game/selesai');
-        }
-
-        return view('materi/game/tebak_harakat', [
-            'huruf' => session()->get('game_harakat_soal')[$step + 1],
-            'pilihan' => $pilihan,
-            'step' => $step + 1,
-            'jawaban' => $jawaban,
-            'status' => $status
-        ]);
+    // Tambah skor di session jika benar
+    if ($status === 'benar') {
+        $score = session()->get('game_cari_score') ?? 0;
+        session()->set('game_cari_score', $score + 20);
     }
+
+    // Soal selanjutnya
+    $nextStep = $step + 1;
+    if ($nextStep >= count($soalTetap)) {
+        return redirect()->to('/materi/game/selesai');
+    }
+
+    return redirect()->to('/materi/game/level-harakat/' . $nextStep);
+}
 
     public function startHarakat()
     {

@@ -38,7 +38,7 @@ $routes->group('materi/game', function($routes) {
     $routes->post('level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
     $routes->get('start-harakat', 'Game::startHarakat');
     $routes->get('level-harakat/(:segment)', 'Game::levelHarakat/$1');
-    $routes->post('level-harakat', 'Game::checkLevelHarakat');
+    $routes->post('level-harakat/(:num)', 'Game::checkLevelHarakat/$1');
     $routes->get('selesai', 'Game::selesai');
 });
 
