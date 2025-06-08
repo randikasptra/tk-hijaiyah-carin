@@ -10,10 +10,54 @@
         .volume-slider {
             width: 100px;
         }
+
+        /* 🔄 Smart Loader */
+        #loader {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #f472b6; /* pink-400 */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body class="relative bg-cover bg-center" style="background-image: url('<?= base_url('assets/img/bg-bukit.jpg') ?>');">
+
+    <!-- 🔄 Smart Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
 
     <!-- 🎵 Backsound Utama -->
     <audio id="backsound" autoplay loop>
@@ -21,7 +65,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- ⬅️ Tombol Kembali ke Dashboard Guru -->
+    <!-- ⬅️ Tombol Kembali -->
     <div class="fixed top-4 left-4 z-50">
         <a href="<?= base_url('materi/dashboard') ?>"
            class="flex items-center gap-2 px-4 py-2 rounded-full shadow-md bg-pink-200 text-pink-800 font-semibold transition hover:bg-pink-300 hover:scale-105 hover:shadow-lg">
@@ -40,7 +84,7 @@
         <?= $this->renderSection('content') ?>
     </main>
 
-    <!-- 🔧 Script Backsound & Volume -->
+    <!-- 🧠 Script Volume -->
     <script>
         const backsound = document.getElementById("backsound");
         const toggleSound = document.getElementById("toggleSound");
@@ -73,7 +117,15 @@
         });
     </script>
 
-    <!-- 🧠 Script Tambahan dari Halaman -->
+    <!-- 🎉 Loader Disappear -->
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            loader.classList.add("hidden");
+        });
+    </script>
+
+    <!-- 🧠 Script Halaman -->
     <?= $this->renderSection('script') ?>
 
     <!-- 👋 Welcome Sound -->
@@ -111,4 +163,5 @@
         }
     </script>
 </body>
+
 </html>
