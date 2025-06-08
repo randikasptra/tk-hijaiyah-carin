@@ -24,7 +24,7 @@
 
         <!-- 👦 Gambar Anak -->
         <div class="absolute left-4 bottom-4 z-20">
-            <img src="<?= base_url('assets/img/karakter-anak.jpg') ?>" alt="Karakter Anak" class="w-28 md:w-36 lg:w-44">
+            <img src="<?= base_url('assets/img/cartoon-2.png') ?>" alt="Karakter Anak" class="w-28 md:w-36 lg:w-44">
         </div>
 
         <!-- 💡 Pilihan Huruf Hijaiyah -->

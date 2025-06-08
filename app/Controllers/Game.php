@@ -14,7 +14,7 @@ class Game extends BaseController
 
         if ($step == 0) {
             // Ambil 5 soal acak dan simpan di session
-            $soal = $hurufModel->orderBy('RAND()')->findAll(5);
+            $soal = $hurufModel->orderBy('RAND()')->finDzal(5);
             $session->set('game_huruf_soal', $soal);
             $session->set('game_huruf_score', 0);
         } else {
@@ -85,7 +85,7 @@ class Game extends BaseController
     $session = session();
 
     // Soal tetap sesuai urutan suara
-    $soalTetap = ['Nun', 'Ba', 'Dal', 'Ro', 'Kho']; // 5 soal fix urutan
+    $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha']; // 5 soal fix urutan
 
     if (!isset($soalTetap[$step])) {
         return redirect()->to('/materi/game/selesai');
@@ -93,13 +93,12 @@ class Game extends BaseController
 
     $benar = $soalTetap[$step];
 
-    // Distraktor manual
     $opsiDistraktor = [
-        'Nun' => ['Mim', 'Ta'],
+        'Na' => ['Ma', 'Ta'],
         'Ba' => ['Ta', 'Tsa'],
-        'Dal' => ['Dzal', 'Ro'],
-        'Ro' => ['Zai', 'Dal'],
-        'Kho' => ['Kha', 'Ha'],
+        'Dza' => ['Ba', 'Ro'],
+        'Ro' => ['Gha', 'Dza'],
+        'Kha' => ['Kho', 'Ha'],
     ];
 
     $pilihan = $opsiDistraktor[$benar] ?? [];
@@ -107,7 +106,7 @@ class Game extends BaseController
     shuffle($pilihan);
 
     // Ganti background & suara berdasarkan step
-   $bgList = ['game-1.png', 'game-2.png', 'game-3.png', 'game-4.png', 'game-5.png'];
+   $bgList = ['game-1.png', 'game-2.png', 'game-3.jpg', 'game-4.png', 'game-5.png'];
 $bgImage = $bgList[$step] ?? 'game-1.png';
 
 return view('materi/game/tebak_harakat', [
@@ -123,7 +122,7 @@ return view('materi/game/tebak_harakat', [
    public function checkLevelHarakat($step = 0)
 {
     $jawaban = $this->request->getPost('jawaban');
-    $soalTetap = ['Nun', 'Ba', 'Dal', 'Ro', 'Kho'];
+    $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
     $benar = $soalTetap[$step] ?? null;
 
     $status = ($jawaban === $benar) ? 'benar' : 'salah';
@@ -145,7 +144,7 @@ return view('materi/game/tebak_harakat', [
 
     public function startHarakat()
     {
-        $hurufDasar = ['ba', 'ta', 'tsa', 'fa', 'kaf', 'lam', 'nun', 'ya', 'ha'];
+        $hurufDasar = ['ba', 'ta', 'tsa', 'fa', 'kaf', 'lam', 'Na', 'ya', 'ha'];
         shuffle($hurufDasar);
         $soal = array_slice($hurufDasar, 0, 5); // ambil 5 soal acak
         session()->set('game_harakat_soal', $soal);
