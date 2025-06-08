@@ -6,15 +6,13 @@ use App\Models\HurufModel;
 
 class Game extends BaseController
 {
-    // Game.php
     public function levelHuruf($step = 0)
     {
         $session = session();
         $hurufModel = new HurufModel();
 
         if ($step == 0) {
-            // Ambil 5 soal acak dan simpan di session
-            $soal = $hurufModel->orderBy('RAND()')->finDzal(5);
+            $soal = $hurufModel->orderBy('RAND()')->findAll(5);
             $session->set('game_huruf_soal', $soal);
             $session->set('game_huruf_score', 0);
         } else {
@@ -40,7 +38,6 @@ class Game extends BaseController
         $hurufModel = new HurufModel();
         $soal = $session->get('game_huruf_soal');
 
-        // ⛔️ Cegah akses jika index melebihi jumlah soal
         if (!isset($soal[$step])) {
             return redirect()->to('/materi/game/selesai');
         }
@@ -49,13 +46,11 @@ class Game extends BaseController
         $benar = strtolower($soal[$step]['nama']);
         $status = $jawaban === $benar ? 'benar' : 'salah';
 
-        // ✅ Tambah skor jika benar
         if ($status === 'benar') {
             $score = $session->get('game_huruf_score') ?? 0;
             $session->set('game_huruf_score', $score + 20);
         }
 
-        // ⛔️ Kalau sudah terakhir, langsung ke selesai
         if ($step >= count($soal) - 1) {
             return redirect()->to('/materi/game/selesai');
         }
@@ -69,7 +64,6 @@ class Game extends BaseController
         ]);
     }
 
-
     public function selesai()
     {
         $score = session()->get('game_huruf_score') ?? 0;
@@ -79,79 +73,90 @@ class Game extends BaseController
         return view('materi/game/selesai', ['score' => $score]);
     }
 
-
     public function levelHarakat($step = 0)
-{
-    $session = session();
+    {
+        $session = session();
 
-    // Soal tetap sesuai urutan suara
-    $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha']; // 5 soal fix urutan
+        $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
 
-    if (!isset($soalTetap[$step])) {
-        return redirect()->to('/materi/game/selesai');
+        if (!isset($soalTetap[$step])) {
+            return redirect()->to('/materi/game/selesai');
+        }
+
+        $benar = $soalTetap[$step];
+
+        $opsiDistraktor = [
+            'Na' => ['Ma', 'Ta'],
+            'Ba' => ['Ta', 'Tsa'],
+            'Dza' => ['Ba', 'Ro'],
+            'Ro' => ['Gha', 'Dza'],
+            'Kha' => ['Kho', 'Ha'],
+        ];
+
+        $pilihan = $opsiDistraktor[$benar] ?? [];
+        $pilihan[] = $benar;
+        shuffle($pilihan);
+
+        $bgList = ['game-1.png', 'game-2.png', 'game-3.png', 'game-4.png', 'game-5.png'];
+        $bgImage = $bgList[$step] ?? 'game-1.png';
+
+        $soundFile = 'game-' . ($step + 1) . '.mp3';
+        $soundPath = FCPATH . 'sound/' . $soundFile;
+        if (!file_exists($soundPath)) {
+            $soundFile = 'default.mp3';
+        }
+
+        // Posisi acak
+        $posisi = [
+            ['top' => '18%', 'left' => '30%'],
+            ['top' => '48%', 'left' => '65%'],
+            ['top' => '72%', 'left' => '45%'],
+            ['top' => '25%', 'left' => '70%'],
+            ['top' => '65%', 'left' => '25%']
+        ];
+        shuffle($posisi);
+        $posisi = array_slice($posisi, 0, 3);
+
+        return view('materi/game/tebak_harakat', [
+            'step' => $step,
+            'benar' => $benar,
+            'pilihan' => $pilihan,
+            'bgImage' => $bgImage,
+            'soundFile' => $soundFile,
+            'posisi' => $posisi
+        ]);
     }
 
-    $benar = $soalTetap[$step];
+    public function checkLevelHarakat($step = 0)
+    {
+        $jawaban = $this->request->getPost('jawaban');
+        $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
+        $benar = $soalTetap[$step] ?? null;
 
-    $opsiDistraktor = [
-        'Na' => ['Ma', 'Ta'],
-        'Ba' => ['Ta', 'Tsa'],
-        'Dza' => ['Ba', 'Ro'],
-        'Ro' => ['Gha', 'Dza'],
-        'Kha' => ['Kho', 'Ha'],
-    ];
+        $status = ($jawaban === $benar) ? 'benar' : 'salah';
 
-    $pilihan = $opsiDistraktor[$benar] ?? [];
-    $pilihan[] = $benar;
-    shuffle($pilihan);
+        if ($status === 'benar') {
+            $score = session()->get('game_cari_score') ?? 0;
+            session()->set('game_cari_score', $score + 20);
+        }
 
-    // Ganti background & suara berdasarkan step
-   $bgList = ['game-1.png', 'game-2.png', 'game-3.jpg', 'game-4.png', 'game-5.png'];
-$bgImage = $bgList[$step] ?? 'game-1.png';
+        $nextStep = $step + 1;
+        if ($nextStep >= count($soalTetap)) {
+            return redirect()->to('/materi/game/selesai');
+        }
 
-return view('materi/game/tebak_harakat', [
-    'step' => $step,
-    'benar' => $benar,
-    'pilihan' => $pilihan,
-    'bgImage' => $bgImage, // ⬅ ini penting!
-    'soundFile' => 'game-' . ($step + 1) . '.mp3'
-]);
-}
-
-
-   public function checkLevelHarakat($step = 0)
-{
-    $jawaban = $this->request->getPost('jawaban');
-    $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
-    $benar = $soalTetap[$step] ?? null;
-
-    $status = ($jawaban === $benar) ? 'benar' : 'salah';
-
-    // Tambah skor di session jika benar
-    if ($status === 'benar') {
-        $score = session()->get('game_cari_score') ?? 0;
-        session()->set('game_cari_score', $score + 20);
+        return redirect()->to('/materi/game/level-harakat/' . $nextStep);
     }
-
-    // Soal selanjutnya
-    $nextStep = $step + 1;
-    if ($nextStep >= count($soalTetap)) {
-        return redirect()->to('/materi/game/selesai');
-    }
-
-    return redirect()->to('/materi/game/level-harakat/' . $nextStep);
-}
 
     public function startHarakat()
     {
         $hurufDasar = ['ba', 'ta', 'tsa', 'fa', 'kaf', 'lam', 'Na', 'ya', 'ha'];
         shuffle($hurufDasar);
-        $soal = array_slice($hurufDasar, 0, 5); // ambil 5 soal acak
+        $soal = array_slice($hurufDasar, 0, 5);
         session()->set('game_harakat_soal', $soal);
         session()->set('game_harakat_score', 0);
         return redirect()->to('/materi/game/level-harakat/0');
     }
-
 
     private function generatePilihanHuruf($benar, $list)
     {

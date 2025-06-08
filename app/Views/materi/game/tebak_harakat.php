@@ -32,14 +32,20 @@
         $pilihan = $pilihan ?? ['Ain', 'Lam', 'Tho'];
         $benar = $benar ?? 'Ain';
         $posisi = [
-            ['top' => '18%', 'left' => '30%'],
-            ['top' => '48%', 'left' => '65%'],
-            ['top' => '72%', 'left' => '45%'],
-        ];
+    ['top' => '10%', 'left' => '20%'],
+    ['top' => '30%', 'left' => '60%'],
+    ['top' => '70%', 'left' => '50%'],
+    ['top' => '50%', 'left' => '30%'],
+    ['top' => '20%', 'left' => '70%'],
+];
+shuffle($posisi);
+$posisi = array_slice($posisi, 0, 3); // ambil 3 posisi acak
+
+        
         ?>
 
         <?php foreach ($pilihan as $i => $huruf): ?>
-            <form method="post" action="<?= base_url('materi/game/level-harakat/' . ($step ?? 1)) ?>">
+            <form method="post" action="<?= base_url('materi/game/level-harakat/' . ($step ?? 0)) ?>">
                 <input type="hidden" name="jawaban" value="<?= esc($huruf) ?>">
                 <button type="submit" class="absolute z-20 hover:scale-110 transition-transform"
                     style="top: <?= $posisi[$i]['top'] ?>; left: <?= $posisi[$i]['left'] ?>;">
@@ -51,17 +57,30 @@
     </div>
 </div>
 
-<!-- 🔊 Suara Instruksi -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const audio = new Audio("<?= base_url('sound/' . $soundFile) ?>");
-        audio.play().catch(err => console.warn("Gagal play audio instruksi:", err));
 
-        document.getElementById("replayBtn").addEventListener("click", () => {
-            audio.currentTime = 0;
-            audio.play();
+        // Event saat gagal load
+        audio.onerror = function () {
+            console.warn("❌ Gagal memuat audio:", audio.src);
+        };
+
+        // Mainkan audio
+        audio.play().catch(err => {
+            console.warn("⚠️ Gagal memutar audio:", err);
         });
+
+        // Tombol ulang
+        const replay = document.getElementById("replayBtn");
+        if (replay) {
+            replay.addEventListener("click", () => {
+                audio.currentTime = 0;
+                audio.play();
+            });
+        }
     });
 </script>
+
 
 <?= $this->endSection() ?>
