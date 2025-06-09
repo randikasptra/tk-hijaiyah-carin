@@ -17,23 +17,23 @@ $routes->get('/logout', 'Auth::logout');
 // ==============================
 // 👤 ROLE-BASED DASHBOARDS
 // ==============================
-$routes->get('/admin', 'Admin::index');
-$routes->get('/guru', 'Guru::index');
+$routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('/guru', 'Guru::index', ['filter' => 'role:guru']);
 
 // ==============================
 // 📚 MATERI ROUTES
 // ==============================
-$routes->get('/materi/dashboard', 'Materi::home');
-$routes->get('/materi/home', 'Materi::home');
-$routes->get('/materi/mengenal', 'Materi::mengenal');
-$routes->get('/materi/menghafal', 'Materi::menghafal');
-$routes->get('/materi/game', 'Materi::game');
-$routes->get('/materi/harakat_hijaiyah', 'Materi::harakat');
+$routes->get('/materi/dashboard', 'Materi::home', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/home', 'Materi::home', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/mengenal', 'Materi::mengenal', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/menghafal', 'Materi::menghafal', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/game', 'Materi::game', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/harakat_hijaiyah', 'Materi::harakat', ['filter' => 'role:admin,guru']);
 
 // ==============================
 // 🎮 GAME ROUTES - DI BAWAH PREFIX /materi/game
 // ==============================
-$routes->group('materi/game', function($routes) {
+$routes->group('materi/game', ['filter' => 'role:admin,guru'], function($routes) {
     $routes->get('level-huruf/(:num)', 'Game::levelHuruf/$1');
     $routes->post('level-huruf/(:num)', 'Game::checkLevelHuruf/$1');
     $routes->get('start-harakat', 'Game::startHarakat');
@@ -45,9 +45,18 @@ $routes->group('materi/game', function($routes) {
 // ==============================
 // 🛠️ ADMIN - MANAJEMEN USER
 // ==============================
-$routes->get('/admin/user', 'Admin::dataUser');
-$routes->get('/admin/user/tambah', 'Admin::tambahUser');
-$routes->post('/admin/user/tambah', 'Admin::simpanUser');
-$routes->get('/admin/user/edit/(:num)', 'Admin::editUser/$1');
-$routes->post('/admin/user/edit/(:num)', 'Admin::updateUser/$1');
-$routes->get('/admin/user/hapus/(:num)', 'Admin::hapusUser/$1');
+$routes->group('admin', ['filter' => 'role:admin'], function($routes) {
+    $routes->get('user', 'Admin::dataUser');
+    $routes->get('user/tambah', 'Admin::tambahUser');
+    $routes->post('user/tambah', 'Admin::simpanUser');
+    $routes->get('user/edit/(:num)', 'Admin::editUser/$1');
+    $routes->post('user/edit/(:num)', 'Admin::updateUser/$1');
+    $routes->get('user/hapus/(:num)', 'Admin::hapusUser/$1');
+});
+
+// ==============================
+// 🚫 UNAUTHORIZED ROUTE
+// ==============================
+$routes->get('/unauthorized', function () {
+    return view('errors/html/unauthorized');
+});
