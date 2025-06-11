@@ -74,58 +74,63 @@ class Game extends BaseController
     }
 
     public function levelHarakat($step = 0)
-    {
-        $session = session();
+{
+    $session = session();
 
-        $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
-
-        if (!isset($soalTetap[$step])) {
-            return redirect()->to('/materi/game/selesai');
-        }
-
-        $benar = $soalTetap[$step];
-
-        $opsiDistraktor = [
-            'Na' => ['Ma', 'Ta'],
-            'Ba' => ['Ta', 'Tsa'],
-            'Dza' => ['Ba', 'Ro'],
-            'Ro' => ['Gha', 'Dza'],
-            'Kha' => ['Kho', 'Ha'],
-        ];
-
-        $pilihan = $opsiDistraktor[$benar] ?? [];
-        $pilihan[] = $benar;
-        shuffle($pilihan);
-
-        $bgList = ['game-1.png', 'game-2.png', 'game-3.png', 'game-4.png', 'game-5.png'];
-        $bgImage = $bgList[$step] ?? 'game-1.png';
-
-        $soundFile = 'game-' . ($step + 1) . '.mp3';
-        $soundPath = FCPATH . 'sound/' . $soundFile;
-        if (!file_exists($soundPath)) {
-            $soundFile = 'default.mp3';
-        }
-
-        // Posisi acak
-        $posisi = [
-            ['top' => '18%', 'left' => '30%'],
-            ['top' => '48%', 'left' => '65%'],
-            ['top' => '72%', 'left' => '45%'],
-            ['top' => '25%', 'left' => '70%'],
-            ['top' => '65%', 'left' => '25%']
-        ];
-        shuffle($posisi);
-        $posisi = array_slice($posisi, 0, 3);
-
-        return view('materi/game/tebak_harakat', [
-            'step' => $step,
-            'benar' => $benar,
-            'pilihan' => $pilihan,
-            'bgImage' => $bgImage,
-            'soundFile' => $soundFile,
-            'posisi' => $posisi
-        ]);
+    // Skip step 3 (index 3)
+    if ($step === 3) {
+        return redirect()->to('/materi/game/level-harakat/4');
     }
+
+    $soalTetap = ['Na', 'Ba', 'Dza', 'Ro', 'Kha'];
+
+    if (!isset($soalTetap[$step])) {
+        return redirect()->to('/materi/game/selesai');
+    }
+
+    $benar = $soalTetap[$step];
+
+    $opsiDistraktor = [
+        'Na' => ['Ma', 'Ta'],
+        'Ba' => ['Ta', 'Tsa'],
+        'Dza' => ['Ba', 'Ro'],
+        'Ro' => ['Gha', 'Dza'],
+        'Kha' => ['Kho', 'Ha'],
+    ];
+
+    $pilihan = $opsiDistraktor[$benar] ?? [];
+    $pilihan[] = $benar;
+    shuffle($pilihan);
+
+    $bgList = ['game-1.png', 'game-2.png', 'game-3.png', 'game-4.png', 'game-5.png'];
+    $bgImage = $bgList[$step] ?? 'game-1.png';
+
+    $soundFile = 'game-' . ($step + 1) . '.mp3';
+    $soundPath = FCPATH . 'sound/' . $soundFile;
+    if (!file_exists($soundPath)) {
+        $soundFile = 'default.mp3';
+    }
+
+    $posisi = [
+        ['top' => '18%', 'left' => '30%'],
+        ['top' => '48%', 'left' => '65%'],
+        ['top' => '72%', 'left' => '45%'],
+        ['top' => '25%', 'left' => '70%'],
+        ['top' => '65%', 'left' => '25%']
+    ];
+    shuffle($posisi);
+    $posisi = array_slice($posisi, 0, 3);
+
+    return view('materi/game/tebak_harakat', [
+        'step' => $step,
+        'benar' => $benar,
+        'pilihan' => $pilihan,
+        'bgImage' => $bgImage,
+        'soundFile' => $soundFile,
+        'posisi' => $posisi
+    ]);
+}
+
 
     public function checkLevelHarakat($step = 0)
     {

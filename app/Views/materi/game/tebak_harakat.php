@@ -53,22 +53,78 @@
     </div>
 </div>
 
+<!-- Preload all audios in step 0 -->
+<?php if (($step ?? 0) == 0): ?>
+    <div id="preloadAudioContainer" style="display:none;">
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+            <audio id="preload-audio-<?= $i ?>" preload="auto">
+                <source src="<?= base_url('sound/game-' . $i . '.mp3') ?>" type="audio/mpeg">
+            </audio>
+        <?php endfor; ?>
+    </div>
+<?php endif; ?>
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Loader CSS -->
+<style>
+.loader {
+    border: 2px solid transparent;
+    border-top: 2px solid #7c3aed;
+    border-right: 2px solid #7c3aed;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>
+
 <!-- Sound & Animasi -->
 <script>
-    const audio = new Audio("<?= base_url('sound/' . $soundFile) ?>");
-    audio.preload = "auto";
-    const replay = document.getElementById("replayBtn");
+    // Pakai audio preload jika ada, sesuai step
+    const step = <?= $step ?? 0 ?>;
+    let audio;
+    const preloadedAudio = document.getElementById("preload-audio-" + (step + 1));
+
+    if (preloadedAudio) {
+        audio = preloadedAudio;
+    } else {
+        audio = new Audio("<?= base_url('sound/' . $soundFile) ?>");
+        audio.preload = "auto";
+        audio.load();
+    }
+
+    audio.currentTime = 0;
+
+    // Spinner loader
+    const replayBtn = document.getElementById("replayBtn");
+    const spinner = document.createElement("div");
+    spinner.innerHTML = `<div class="loader absolute top-2 right-2 w-5 h-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>`;
+    spinner.id = "audioSpinner";
+    spinner.style.display = "none";
+    replayBtn.parentElement.appendChild(spinner);
+
+    // Show spinner until audio ready
+    spinner.style.display = "block";
+    audio.addEventListener("canplaythrough", function () {
+        spinner.style.display = "none";
+        audio.play().catch(err => console.warn("⚠ Gagal play:", err));
+    }, { once: true });
+
+    // Replay button
+    $('#replayBtn').on('click', function () {
+        audio.currentTime = 0;
+        audio.play();
+    });
 
     $(document).ready(function () {
         audio.play().catch(err => console.warn("⚠ Gagal play:", err));
-
-        $('#replayBtn').on('click', function () {
-            audio.currentTime = 0;
-            audio.play();
-        });
 
         $('.huruf-btn').on('click', function () {
             const huruf = $(this).data('huruf');

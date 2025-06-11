@@ -7,29 +7,18 @@ use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
- public function login()
-{
-    if (session()->get('logged_in')) {
-        switch (session()->get('user_role')) {
-            case 'admin':
-                return redirect()->to('/admin');
-            case 'guru':
-                return redirect()->to('/guru');
-            default:
-                return redirect()->to('/');
-        }
+    public function login()
+    {
+        // Hancurkan session apapun yang masih hidup
+        session()->destroy();
+
+        // Set header agar halaman tidak disimpan di cache
+        $this->response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+        $this->response->setHeader('Pragma', 'no-cache');
+        $this->response->setHeader('Expires', '0');
+
+        return view('auth/login');
     }
-
-    // Set header agar halaman tidak disimpan di cache
-    $this->response->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-    $this->response->setHeader('Pragma', 'no-cache');
-    $this->response->setHeader('Expires', '0');
-
-    return view('auth/login');
-}
-
-
-
 
     public function doLogin()
     {
@@ -48,6 +37,10 @@ class Auth extends Controller
         $user = $userModel->where('email', $email)->first();
 
         if ($user && password_verify($password, $user['password'])) {
+            // Reset session sebelum login baru
+            $session->destroy();
+            $session->start();
+
             // Simpan data ke session
             $session->set([
                 'user_id'    => $user['id'],
