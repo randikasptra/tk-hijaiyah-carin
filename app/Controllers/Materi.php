@@ -35,6 +35,13 @@ class Materi extends BaseController
     }
     public function home()
     {
+        return view('materi/dashboard', [
+            'pageTitle' => 'Beranda Belajar',
+            'backsound' => 'Backsoundd.mp3'
+        ]);
+    }
+    public function home2()
+    {
         return view('materi/home', [
             'pageTitle' => 'Beranda Belajar',
             'backsound' => 'Backsoundd.mp3'

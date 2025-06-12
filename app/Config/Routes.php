@@ -24,7 +24,7 @@ $routes->get('/guru', 'Guru::index', ['filter' => 'role:guru']);
 // 📚 MATERI ROUTES
 // ==============================
 $routes->get('/materi/dashboard', 'Materi::home', ['filter' => 'role:admin,guru']);
-$routes->get('/materi/home', 'Materi::home', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/home', 'Materi::home2', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/mengenal', 'Materi::mengenal', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/menghafal', 'Materi::menghafal', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/game', 'Materi::game', ['filter' => 'role:admin,guru']);
@@ -40,6 +40,8 @@ $routes->group('materi/game', ['filter' => 'role:admin,guru'], function($routes)
     $routes->get('level-harakat/(:segment)', 'Game::levelHarakat/$1');
     $routes->post('level-harakat/(:num)', 'Game::checkLevelHarakat/$1');
     $routes->get('selesai', 'Game::selesai');
+    $routes->get('spa-harakat', 'Game::spaHarakat');
+    
 });
 
 // ==============================
