@@ -42,21 +42,22 @@ class Materi extends BaseController
     }
 
     public function mengenal_partials()
-{
-    $hurufModel = new HurufModel();
-
-    // Cek apakah ini request AJAX (untuk SPA)
-    if ($this->request->isAJAX()) {
-        return view('materi/partials/mengenal_content', [
+    {
+        $hurufModel = new HurufModel();
+        $data = [
             'huruf' => $hurufModel->findAll(),
-        ]);
-    }
+            'pageTitle' => 'Mengenal Huruf Hijaiyah',
+            'backsound' => 'Backsoundd.mp3'
+        ];
 
-    // Kalau bukan AJAX (akses langsung via URL), bungkus dengan layout
-    return view('materi/mengenal', [
-        'huruf' => $hurufModel->findAll()
-    ]);
-}
+        // Jika AJAX (SPA), kirim konten parsial saja
+        if ($this->request->isAJAX()) {
+            return view('materi/partials/mengenal_partials', $data);
+        }
+
+        // Jika bukan AJAX, kirim halaman lengkap (misalnya saat user buka langsung)
+        return view('materi/mengenal', $data);
+    }
     public function home2()
     {
         return view('materi/home', [

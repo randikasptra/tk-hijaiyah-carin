@@ -1,9 +1,28 @@
+// ✅ File: app/Views/materi/mengenal.php
+
 <?= $this->extend('layouts/main') ?>
+
 <?= $this->section('content') ?>
-
-<!-- Bungkus untuk SPA -->
 <div id="spa-container">
-    <?= view('materi/partials/mengenal_content', ['huruf' => $huruf]) ?>
+    <?= view('materi/partials/mengenal_partials', ['huruf' => $huruf]) ?>
 </div>
+<?= $this->endSection() ?>
 
+<?= $this->section('script') ?>
+<!-- jQuery SPA script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.spa-link', function (e) {
+        e.preventDefault();
+        const url = $(this).attr('href');
+
+        $('#spa-container').html('<p class="text-purple-800 font-bold text-xl animate-pulse">Memuat konten...</p>');
+
+        $.get(url, function (data) {
+            $('#spa-container').html(data);
+        }).fail(function () {
+            $('#spa-container').html('<p class="text-red-500 font-bold">Gagal memuat halaman.</p>');
+        });
+    });
+</script>
 <?= $this->endSection() ?>
