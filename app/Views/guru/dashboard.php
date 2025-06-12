@@ -39,7 +39,7 @@
 
         <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-            <a href="<?= base_url('guru/materi') ?>"
+            <a href="<?= base_url('/guru') ?>"
                 class="bg-gradient-to-tr from-green-500 to-green-700 text-white rounded-3xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-pointer">
                 <i data-feather="book-open" class="w-10 h-10 mb-3"></i>
                 <span class="font-bold text-lg">Materi Pembelajaran</span>
@@ -53,7 +53,7 @@
                 <p class="text-cyan-200 mt-1 text-center text-sm">Akses dan jalankan aktivitas belajar anak</p>
             </a>
 
-            <a href="<?= base_url('guru/siswa') ?>"
+            <a href="<?= base_url('/guru') ?>"
                 class="bg-gradient-to-tr from-yellow-400 to-yellow-600 text-white rounded-3xl p-6 shadow-lg flex flex-col items-center justify-center hover:scale-105 transition-transform cursor-pointer">
                 <i data-feather="users" class="w-10 h-10 mb-3"></i>
                 <span class="font-bold text-lg">Daftar Siswa</span>

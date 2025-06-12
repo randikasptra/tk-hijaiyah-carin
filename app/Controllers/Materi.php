@@ -40,6 +40,23 @@ class Materi extends BaseController
             'backsound' => 'Backsoundd.mp3'
         ]);
     }
+
+    public function mengenal_partials()
+{
+    $hurufModel = new HurufModel();
+
+    // Cek apakah ini request AJAX (untuk SPA)
+    if ($this->request->isAJAX()) {
+        return view('materi/partials/mengenal_content', [
+            'huruf' => $hurufModel->findAll(),
+        ]);
+    }
+
+    // Kalau bukan AJAX (akses langsung via URL), bungkus dengan layout
+    return view('materi/mengenal', [
+        'huruf' => $hurufModel->findAll()
+    ]);
+}
     public function home2()
     {
         return view('materi/home', [
@@ -60,7 +77,7 @@ class Materi extends BaseController
         return view('materi/harakat_hijaiyah', [
             'pageTitle' => 'Game Interaktif',
             'backsound' => 'Backsoundd.mp3'
-            
+
         ]);
     }
 }

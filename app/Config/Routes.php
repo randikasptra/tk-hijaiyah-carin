@@ -29,6 +29,7 @@ $routes->get('/materi/mengenal', 'Materi::mengenal', ['filter' => 'role:admin,gu
 $routes->get('/materi/menghafal', 'Materi::menghafal', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/game', 'Materi::game', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/harakat_hijaiyah', 'Materi::harakat', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/mengenal_partials', 'Materi::mengenal_partials', ['filter' => 'role:admin,guru']);
 
 // ==============================
 // 🎮 GAME ROUTES - DI BAWAH PREFIX /materi/game
