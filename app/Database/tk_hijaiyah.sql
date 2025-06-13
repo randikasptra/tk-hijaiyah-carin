@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 13 Jun 2025 pada 00.23
+-- Waktu pembuatan: 13 Jun 2025 pada 22.59
 -- Versi server: 9.1.0
 -- Versi PHP: 8.3.14
 
@@ -20,82 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `tk_hijaiyah`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `audio`
---
-
-DROP TABLE IF EXISTS `audio`;
-CREATE TABLE IF NOT EXISTS `audio` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `audio`
---
-
-INSERT INTO `audio` (`id`, `nama`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'backsound', 'sound/Backsoundd.mp3', NULL, NULL),
-(2, 'backsound', 'sound/Mengenal.mp3', NULL, NULL),
-(3, 'harakat', 'sound/MK_HIJAIYAH.mp3', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `huruf_hijaiyah`
---
-
-DROP TABLE IF EXISTS `huruf_hijaiyah`;
-CREATE TABLE IF NOT EXISTS `huruf_hijaiyah` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `suara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `huruf_hijaiyah`
---
-
-INSERT INTO `huruf_hijaiyah` (`id`, `nama`, `gambar`, `suara`, `created_at`, `updated_at`) VALUES
-(1, 'Alif', 'assets/img/1.Alif.png', 'assets/suara/1.Alif.mp3', NULL, NULL),
-(2, 'Ba', 'assets/img/2.Ba.png', 'assets/suara/2.Ba.mp3', NULL, NULL),
-(3, 'Ta', 'assets/img/3.Ta.png', 'assets/suara/3.Ta.mp3', NULL, NULL),
-(4, 'Tsa', 'assets/img/4.Tsa.png', 'assets/suara/4.Tsa.mp3', NULL, NULL),
-(5, 'Jim', 'assets/img/5.Jim.png', 'assets/suara/5.Jim.mp3', NULL, NULL),
-(6, 'Kha', 'assets/img/6.Ha.png', 'assets/suara/6.Kha.mp3', NULL, NULL),
-(7, 'Kho', 'assets/img/7.Kha.png', 'assets/suara/7.Kho.mp3', NULL, NULL),
-(8, 'Dal', 'assets/img/8.Dal.png', 'assets/suara/8.Dal.mp3', NULL, NULL),
-(9, 'Dzal', 'assets/img/9.Dzal.png', 'assets/suara/9.Dzal.mp3', NULL, NULL),
-(10, 'Ro', 'assets/img/10.Ro.png', 'assets/suara/10.Ro.mp3', NULL, NULL),
-(11, 'Zai', 'assets/img/11.Zai.png', 'assets/suara/11.Dza.mp3', NULL, NULL),
-(12, 'Sin', 'assets/img/12.Sin.png', 'assets/suara/12.Sin.mp3', NULL, NULL),
-(13, 'Syin', 'assets/img/13.Syin.png', 'assets/suara/13.Syin.mp3', NULL, NULL),
-(14, 'Shod', 'assets/img/14.Shod.png', 'assets/suara/14.Shod.mp3', NULL, NULL),
-(15, 'Dhod', 'assets/img/15.Dhod.png', 'assets/suara/17.Dzho.mp3', NULL, NULL),
-(16, 'Tho', 'assets/img/16.Tho.png', 'assets/suara/16.Tho.mp3', NULL, NULL),
-(17, 'Dzho', 'assets/img/17.Dzho.png', 'assets/suara/17.Dzho.mp3', NULL, NULL),
-(18, 'Ain', 'assets/img/18.Ain.png', 'assets/suara/18.Ain.mp3', NULL, NULL),
-(19, 'Ghoin', 'assets/img/19.Ghoin.png', 'assets/suara/19.Ghain.mp3', NULL, NULL),
-(20, 'Fa', 'assets/img/20.Fa.png', 'assets/suara/20.Fa.mp3', NULL, NULL),
-(21, 'Qof', 'assets/img/21.Qof.png', 'assets/suara/21.Qof.mp3', NULL, NULL),
-(22, 'Kaf', 'assets/img/22.Kaf.png', 'assets/suara/22.Kaf.mp3', NULL, NULL),
-(23, 'Lam', 'assets/img/23.Lam.png', 'assets/suara/23.Lam.mp3', NULL, NULL),
-(24, 'Mim', 'assets/img/24.Mim.png', 'assets/suara/24.Mim.mp3', NULL, NULL),
-(25, 'Nun', 'assets/img/25.Nun.png', 'assets/suara/25.Nun.mp3', NULL, NULL),
-(26, 'Wau', 'assets/img/26.Wau.png', 'assets/suara/26.Wawu.mp3', NULL, NULL),
-(27, 'Hamzah', 'assets/img/27.Hamzah.png', 'assets/suara/27.Hamzah.mp3', NULL, NULL),
-(28, 'Ya', 'assets/img/28.Ya.png', 'assets/suara/29.Ya.mp3', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -141,18 +65,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Admin One', 'admin@example.com', '$2y$10$K/Mvbk4UOa9al9CBNiWoQepCEpHmsJ6.xaFYTHcF2eyYYJZys93KC', 'admin', NULL, NULL),
-(2, 'Guru One', 'guru@example.com', '$2y$10$UP/GmWWKV09BANLLmeJUZuaeAjbZBirboQUBWHLRB5MpYbdcaHh/q', 'guru', NULL, NULL),
+(1, 'Admin Satu', 'admin@gmail.com', '$2y$10$K/Mvbk4UOa9al9CBNiWoQepCEpHmsJ6.xaFYTHcF2eyYYJZys93KC', 'admin', NULL, NULL),
+(2, 'Guru Satu', 'guru@gmail.com', '$2y$10$UP/GmWWKV09BANLLmeJUZuaeAjbZBirboQUBWHLRB5MpYbdcaHh/q', 'guru', NULL, NULL),
 (8, 'Carina Nur Firdaus', 'carina@gmail.com', '$2y$10$KxBYI6ugjINULQfnF6aRouE0gYy9BBB65ZBqB5x.ORU73yojIDU.2', 'admin', NULL, NULL),
-(7, 'Ai Linda N H', 'ailinda@gmail.com', '$2y$10$Gxo4np8JFRdvPHEBAdeGquro9vRvHxkU54YVJNiCggxlOdMmpNGSe', 'guru', NULL, NULL),
-(9, 'Risma Nur Diansari', 'risma1112@gmail.com', '$2y$10$7tpW/xuUctN8jOYWR2NOveZh.5A447Ape9LVMmWXc9mb3ehfn.MZm', 'guru', NULL, NULL);
+(7, 'Linda NH', 'ailinda@gmail.com', '$2y$10$QqieOmCHTL6D/bs9wtOtg.T.cLK9NmJXMYDuFCTHoq50jN0OFnWka', 'guru', NULL, NULL),
+(11, 'RA Asyifa ADMIN', 'tkadmin@gmail.com', '$2y$10$a1dIVSXWRKDqF3iJhcTxn.OhNMUdFNcubLMlQ4HKLzOFRnHc9nk8u', 'admin', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
