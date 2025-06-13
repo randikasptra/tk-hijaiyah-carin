@@ -65,20 +65,13 @@ class Materi extends BaseController
 
     public function mengenal_partials()
     {
-        $hurufModel = new HurufModel();
-        $data = [
-            'huruf' => $hurufModel->findAll(),
-            'pageTitle' => 'Mengenal Huruf Hijaiyah',
-            'backsound' => 'Backsoundd.mp3'
-        ];
-
-        // Jika AJAX (SPA), kirim konten parsial saja
+      
         if ($this->request->isAJAX()) {
-            return view('materi/partials/mengenal_partials', $data);
+            return view('materi/partials/mengenal_partials',);
         }
 
         // Jika bukan AJAX, kirim halaman lengkap (misalnya saat user buka langsung)
-        return view('materi/mengenal', $data);
+        return view('materi/mengenal', );
     }
     public function home2()
     {
