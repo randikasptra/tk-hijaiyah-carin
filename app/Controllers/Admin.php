@@ -36,10 +36,10 @@ class Admin extends BaseController
         $userModel = new UserModel();
 
         $data = [
-            'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
+            'nama'     => $this->request->getPost('nama'),
+            'email'    => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getPost('role')
+            'role'     => $this->request->getPost('role')
         ];
 
         $userModel->insert($data);
@@ -47,36 +47,51 @@ class Admin extends BaseController
         return redirect()->to('/admin/user')->with('success', 'User berhasil ditambahkan');
     }
 
-    public function updateUser($id)
+    public function editUser($id)
     {
-        $userModel = new \App\Models\UserModel();
+        $userModel = new UserModel();
+        $user = $userModel->find($id);
 
-        // Validasi form (opsional tapi disarankan)
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'nama' => 'required|min_length[3]',
-            'email' => 'required|valid_email',
-            'role' => 'required|in_list[admin,guru,siswa]',
-        ]);
-
-        if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->back()
-                ->withInput()
-                ->with('errors', $validation->getErrors());
+        if (!$user) {
+            return redirect()->to('/admin/user')->with('error', 'User tidak ditemukan.');
         }
 
-        // Data yang akan di-update
-        $data = [
-            'nama' => $this->request->getPost('nama'),
-            'email' => $this->request->getPost('email'),
-            'role' => $this->request->getPost('role'),
-        ];
-
-        $userModel->update($id, $data);
-
-        return redirect()->to(base_url('admin/user'))
-            ->with('success', 'Data user berhasil diperbarui.');
+        return view('admin/edit_user', ['user' => $user]);
     }
+
+    public function updateUser($id)
+{
+    $userModel = new UserModel();
+
+    $validation = \Config\Services::validation();
+    $validation->setRules([
+        'name'  => 'required|min_length[3]',
+        'email' => 'required|valid_email',
+        'role'  => 'required|in_list[admin,guru,siswa]',
+    ]);
+
+    if (!$validation->withRequest($this->request)->run()) {
+        return redirect()->back()
+            ->withInput()
+            ->with('errors', $validation->getErrors());
+    }
+
+    $data = [
+        'name'  => $this->request->getPost('name'),
+        'email' => $this->request->getPost('email'),
+        'role'  => $this->request->getPost('role'),
+    ];
+
+    $password = $this->request->getPost('password');
+    if (!empty($password)) {
+        $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    $userModel->update($id, $data);
+
+    return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui.');
+}
+
 
     public function hapusUser($id)
     {

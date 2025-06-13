@@ -20,7 +20,7 @@
         <!-- ✅ Top Navbar -->
         
         <!-- ✅ Page Content -->
-        <main class="flex-1 p-8 md:p-10">
+        <main class="flex-1 p-8 md:p-10  ml-64">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-blue-800 mb-1">Dashboard Admin</h2>
                 <p class="text-gray-700">Halo, <strong><?= session()->get('user_name') ?></strong>! Kamu login sebagai <strong>Admin</strong>.</p>

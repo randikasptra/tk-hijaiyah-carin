@@ -28,7 +28,7 @@
             <select name="role" id="role" required class="mt-1 block w-full border border-gray-300 rounded-md p-2">
                 <option value="">-- Pilih Role --</option>
                 <option value="guru">Guru</option>
-                <option value="siswa">Siswa</option>
+                <option value="admin">Admin</option>
             </select>
         </div>
 
