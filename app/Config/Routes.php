@@ -30,6 +30,11 @@ $routes->get('/materi/menghafal', 'Materi::menghafal', ['filter' => 'role:admin,
 $routes->get('/materi/game', 'Materi::game', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/harakat_hijaiyah', 'Materi::harakat', ['filter' => 'role:admin,guru']);
 $routes->get('/materi/mengenal_partials', 'Materi::mengenal_partials', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/home_partials', 'Materi::home_content', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/menghafal_partials', 'Materi::menghafal_partials', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/harakat_hijaiyah_partials', 'Materi::harakat_hijaiyah_partials', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/dashboard_content', 'Materi::dashboard_content', ['filter' => 'role:admin,guru']);
+$routes->get('/materi/game_partials', 'Materi::game_partials', ['filter' => 'role:admin,guru']);
 
 // ==============================
 // 🎮 GAME ROUTES - DI BAWAH PREFIX /materi/game

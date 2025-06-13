@@ -35,7 +35,8 @@
             width: 60px;
             height: 60px;
             border: 6px solid #f3f3f3;
-            border-top: 6px solid #f472b6; /* pink-400 */
+            border-top: 6px solid #f472b6;
+            /* pink-400 */
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -68,7 +69,7 @@
     <!-- ⬅️ Tombol Kembali -->
     <div class="fixed top-4 left-4 z-50">
         <a href="<?= base_url('materi/dashboard') ?>"
-           class="flex items-center gap-2 px-4 py-2 rounded-full shadow-md bg-pink-200 text-pink-800 font-semibold transition hover:bg-pink-300 hover:scale-105 hover:shadow-lg">
+            class="flex items-center gap-2 px-4 py-2 rounded-full shadow-md bg-pink-200 text-pink-800 font-semibold transition hover:bg-pink-300 hover:scale-105 hover:shadow-lg">
             🏠 Kembali
         </a>
     </div>
@@ -100,7 +101,7 @@
 
         window.addEventListener("DOMContentLoaded", () => {
             if (!sessionStorage.getItem("audioPlayed")) {
-                backsound.play().catch(() => {});
+                backsound.play().catch(() => { });
                 sessionStorage.setItem("audioPlayed", "true");
             }
         });
@@ -161,6 +162,47 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        function attachPlaySoundListeners() {
+            let currentAudio = null;
+            document.querySelectorAll('[data-suara]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const suara = el.getAttribute('data-suara');
+                    if (!suara) return;
+
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                    }
+
+                    currentAudio = new Audio(suara);
+                    currentAudio.play().catch(err => {
+                        console.warn("Gagal play audio:", err);
+                    });
+                });
+            });
+        }
+
+        // Re-attach event listener setiap konten baru dimuat via SPA
+        $(document).on('click', '.spa-link', function (e) {
+            e.preventDefault();
+            const url = $(this).attr('href');
+            $('#spa-container').html('<p class="text-purple-800 font-bold text-xl animate-pulse">Memuat konten...</p>');
+
+            $.get(url, function (data) {
+                $('#spa-container').html(data);
+                attachPlaySoundListeners(); // <== Tambahkan ini di sini
+            }).fail(function () {
+                $('#spa-container').html('<p class="text-red-500 font-bold">Gagal memuat halaman.</p>');
+            });
+        });
+
+        // Saat pertama kali halaman SPA diload
+        $(document).ready(function () {
+            attachPlaySoundListeners();
+        });
     </script>
 </body>
 

@@ -41,6 +41,28 @@ class Materi extends BaseController
         ]);
     }
 
+    public function home_content()
+    {
+        return view('materi/partials/home_content');
+    }
+    public function game_partials()
+    {
+        return view('materi/partials/game_partials');
+    }
+    public function dashboard_content()
+    {
+        return view('materi/partials/dashboard_content');
+    }
+    public function menghafal_partials()
+    {
+        return view('materi/partials/menghafal_partials');
+    }
+    public function harakat_hijaiyah_partials()
+    {
+        return view('materi/partials/harakat_hijaiyah_partials');
+    }
+
+
     public function mengenal_partials()
     {
         $hurufModel = new HurufModel();
