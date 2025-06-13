@@ -18,18 +18,5 @@
              Data User
          </a>
 
-         <!-- <a href="#" class="flex items-center gap-3 text-blue-700 px-4 py-2 rounded hover:bg-blue-100 transition">
-             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8M8 12h8m-6 8h6a2 2 0 002-2v-6a2 2 0 00-2-2h-6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-             </svg>
-             Rekap Nilai
-         </a>
-
-         <a href="#" class="flex items-center gap-3 text-blue-700 px-4 py-2 rounded hover:bg-blue-100 transition">
-             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18m-9 5h9" />
-             </svg>
-             Kelola Soal
-         </a> -->
      </nav>
  </aside>

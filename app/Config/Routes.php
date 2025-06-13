@@ -62,6 +62,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function($routes) {
     $routes->get('user/edit/(:num)', 'Admin::editUser/$1');
     $routes->post('user/edit/(:num)', 'Admin::updateUser/$1');
     $routes->get('user/hapus/(:num)', 'Admin::hapusUser/$1');
+    
 });
 
 // ==============================

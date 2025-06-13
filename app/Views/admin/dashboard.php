@@ -28,8 +28,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-blue-200 p-6 rounded-xl shadow-md">
-                    <h3 class="text-xl font-bold text-blue-800 mb-2">Jumlah Siswa</h3>
-                    <p class="text-4xl font-bold text-blue-900"><?= esc($jumlahSiswa) ?></p>
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">Jumlah Admin</h3>
+                    <p class="text-4xl font-bold text-blue-900"><?= esc($jumlahAdmin) ?></p>
                 </div>
 
                 <div class="bg-purple-200 p-6 rounded-xl shadow-md">
