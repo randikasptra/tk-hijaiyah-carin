@@ -66,12 +66,13 @@ class Game extends BaseController
 
     public function selesai()
     {
-        $score = session()->get('game_huruf_score') ?? 0;
-        session()->remove(['game_huruf_soal', 'game_huruf_score']);
-        session()->remove(['game_harakat_soal', 'game_harakat_score']);
+        $score = $this->request->getGet('score') ?? 0;
 
-        return view('materi/game/selesai', ['score' => $score]);
+        return view('materi/game/selesai', [
+            'score' => $score
+        ]);
     }
+
 
     public function levelHarakat($step = 0)
     {
@@ -136,7 +137,7 @@ class Game extends BaseController
         $soal = [
             ['huruf' => 'Na', 'opsi' => ['Na', 'Ma', 'Ta'], 'sound' => 'game-1.mp3', 'bg' => 'game-1.png'],
             ['huruf' => 'Ba', 'opsi' => ['Ba', 'Tsa', 'Kha'], 'sound' => 'game-2.mp3', 'bg' => 'game-2.png'],
-            ['huruf' => 'Dza', 'opsi' => ['Dza', 'Ro', 'Dal'], 'sound' => 'game-3.mp3', 'bg' => 'game-3.png'],
+            ['huruf' => 'Dza', 'opsi' => ['Dza', 'Ba', 'Dal'], 'sound' => 'game-3.mp3', 'bg' => 'game-3.png'],
             ['huruf' => 'Ro', 'opsi' => ['Ro', 'Gha', 'Dza'], 'sound' => 'game-4.mp3', 'bg' => 'game-4.png'],
             ['huruf' => 'Kha', 'opsi' => ['Kha', 'Kho', 'Ha'], 'sound' => 'game-5.mp3', 'bg' => 'game-5.png'],
         ];

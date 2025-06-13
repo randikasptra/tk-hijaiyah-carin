@@ -10,9 +10,11 @@
 
     function renderSoal(index) {
         if (index >= soal.length) {
-            window.location.href = "<?= base_url('materi/game/selesai') ?>";
+            // Redirect dengan skor sebagai parameter GET
+            window.location.href = "<?= base_url('materi/game/selesai') ?>?score=" + score;
             return;
         }
+
 
         const data = soal[index];
         const opsi = data.opsi;
