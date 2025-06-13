@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 06, 2025 at 08:20 AM
--- Server version: 8.2.0
--- PHP Version: 7.4.33
+-- Waktu pembuatan: 13 Jun 2025 pada 00.23
+-- Versi server: 9.1.0
+-- Versi PHP: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,21 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `audio`
+-- Struktur dari tabel `audio`
 --
 
 DROP TABLE IF EXISTS `audio`;
 CREATE TABLE IF NOT EXISTS `audio` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `file` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `audio`
+-- Dumping data untuk tabel `audio`
 --
 
 INSERT INTO `audio` (`id`, `nama`, `file`, `created_at`, `updated_at`) VALUES
@@ -49,22 +49,22 @@ INSERT INTO `audio` (`id`, `nama`, `file`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `huruf_hijaiyah`
+-- Struktur dari tabel `huruf_hijaiyah`
 --
 
 DROP TABLE IF EXISTS `huruf_hijaiyah`;
 CREATE TABLE IF NOT EXISTS `huruf_hijaiyah` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `gambar` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `suara` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nama` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `suara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `huruf_hijaiyah`
+-- Dumping data untuk tabel `huruf_hijaiyah`
 --
 
 INSERT INTO `huruf_hijaiyah` (`id`, `nama`, `gambar`, `suara`, `created_at`, `updated_at`) VALUES
@@ -100,23 +100,23 @@ INSERT INTO `huruf_hijaiyah` (`id`, `nama`, `gambar`, `suara`, `created_at`, `up
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `group` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `namespace` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namespace` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `time` int NOT NULL,
   `batch` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
@@ -127,24 +127,24 @@ INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` enum('admin','guru','siswa') COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('admin','guru','siswa') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
@@ -152,7 +152,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `u
 (2, 'Guru One', 'guru@example.com', '$2y$10$UP/GmWWKV09BANLLmeJUZuaeAjbZBirboQUBWHLRB5MpYbdcaHh/q', 'guru', NULL, NULL),
 (8, 'Carina Nur Firdaus', 'carina@gmail.com', '$2y$10$KxBYI6ugjINULQfnF6aRouE0gYy9BBB65ZBqB5x.ORU73yojIDU.2', 'admin', NULL, NULL),
 (7, 'Ai Linda N H', 'ailinda@gmail.com', '$2y$10$Gxo4np8JFRdvPHEBAdeGquro9vRvHxkU54YVJNiCggxlOdMmpNGSe', 'guru', NULL, NULL),
-(6, 'Acep', 'acepkudus@gmail.com', '$2y$10$UvqNECjpY5D4sD4iC/F1LOttC1sb7xB2ETBXkFVDzX7V9hDE/xIdu', 'guru', NULL, NULL);
+(9, 'Risma Nur Diansari', 'risma1112@gmail.com', '$2y$10$7tpW/xuUctN8jOYWR2NOveZh.5A447Ape9LVMmWXc9mb3ehfn.MZm', 'guru', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
