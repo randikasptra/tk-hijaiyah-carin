@@ -94,7 +94,7 @@ class Game extends BaseController
         $opsiDistraktor = [
             'Na' => ['Ma', 'Ta'],
             'Ba' => ['Ta', 'Tsa'],
-            'Dza' => ['Ba', 'Ro'],
+            'Dza' => ['Ba', 'Ta'],
             'Ro' => ['Gha', 'Dza'],
             'Kha' => ['Kho', 'Ha'],
         ];
@@ -137,7 +137,7 @@ class Game extends BaseController
         $soal = [
             ['huruf' => 'Na', 'opsi' => ['Na', 'Ma', 'Ta'], 'sound' => 'game-1.mp3', 'bg' => 'game-1.png'],
             ['huruf' => 'Ba', 'opsi' => ['Ba', 'Tsa', 'Kha'], 'sound' => 'game-2.mp3', 'bg' => 'game-2.png'],
-            ['huruf' => 'Dza', 'opsi' => ['Dza', 'Ba', 'Dal'], 'sound' => 'game-3.mp3', 'bg' => 'game-3.png'],
+            ['huruf' => 'Dza', 'opsi' => ['Dza', 'Ba', 'Ta'], 'sound' => 'game-3.mp3', 'bg' => 'game-3.png'],
             ['huruf' => 'Ro', 'opsi' => ['Ro', 'Gha', 'Dza'], 'sound' => 'game-4.mp3', 'bg' => 'game-4.png'],
             ['huruf' => 'Kha', 'opsi' => ['Kha', 'Kho', 'Ha'], 'sound' => 'game-5.mp3', 'bg' => 'game-5.png'],
         ];

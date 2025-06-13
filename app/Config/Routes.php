@@ -19,6 +19,8 @@ $routes->get('/logout', 'Auth::logout');
 // ==============================
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/guru', 'Guru::index', ['filter' => 'role:guru']);
+$routes->match(['get', 'post'], 'guru/update_profile', 'Guru::updateProfile', ['filter' => 'role:guru']);
+$routes->get('guru/dashboard', 'Guru::index', ['filter' => 'role:guru']);
 
 // ==============================
 // 📚 MATERI ROUTES
