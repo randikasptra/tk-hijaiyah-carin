@@ -7,35 +7,34 @@ use App\Models\UserModel;
 
 class Guru extends BaseController
 {
-    public function index()
-    {
-        $session = session();
+   public function index()
+{
+    $session = session();
 
-        // Cek apakah sudah login dan role-nya guru
-        if (!$session->get('logged_in') || $session->get('user_role') !== 'guru') {
-            return redirect()->to('/login');
-        }
-
-        // Ambil user_id dari session
-        $userId = $session->get('user_id');
-
-        // Ambil data user dari database
-        $userModel = new UserModel();
-        $user = $userModel->find($userId);
-
-        if (!$user) {
-            return redirect()->to('/login')->with('error', 'Data user tidak ditemukan.');
-        }
-
-        // Kirim data user ke view
-        $data = [
-            'user_name' => $user['name'],
-            'user_email' => $user['email'],
-            'school_name' => 'TK ABC' // kamu bisa ambil dari tempat lain jika tersedia
-        ];
-
-        return view('guru/dashboard', $data);
+    if (!$session->get('logged_in') || $session->get('user_role') !== 'guru') {
+        return redirect()->to('/login');
     }
+
+    $userId = $session->get('user_id');
+    $userModel = new \App\Models\UserModel();
+    $user = $userModel->find($userId);
+
+    if (!$user) {
+        return redirect()->to('/login')->with('error', 'Data user tidak ditemukan.');
+    }
+
+    $data = [
+        'user_name'   => $user['name'],
+        'user_email'  => $user['email'],
+        'school_name' => 'TK ABC',
+        // Tambahkan baris ini agar flashdata sukses/error kebaca di layout
+        'success'     => session()->getFlashdata('success'),
+        'error'       => session()->getFlashdata('error'),
+    ];
+
+    return view('guru/dashboard', $data);
+}
+
 
     public function updateProfile()
     {
@@ -64,7 +63,13 @@ class Guru extends BaseController
 
         $userModel->update($userId, $data);
 
-        return redirect()->to('guru/dashboard')->with('success', 'Profil berhasil diperbarui.');
+        if ($this->request->isAJAX()) {
+    return $this->response->setJSON(['success' => true, 'message' => 'Profil berhasil diperbarui']);
+}
+
+return redirect()->to('guru/dashboard')->with('success', 'Profil berhasil diperbarui.');
+
+
     }
 
 }

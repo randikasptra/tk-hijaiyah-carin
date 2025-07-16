@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Heroicons CDN -->
     <script src="https://unpkg.com/@heroicons/react@2.0.16/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -352,6 +354,56 @@
             attachPlaySoundListeners();
         });
     </script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('updateProfileForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: data.message,
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    timerProgressBar: true
+                });
+
+                // Tutup modal
+                document.getElementById('settingsModal').classList.add('hidden');
+                form.reset(); // optional, reset form setelah submit
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal memperbarui profil!',
+                text: 'Terjadi kesalahan.',
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

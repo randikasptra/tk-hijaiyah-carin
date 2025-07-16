@@ -6,6 +6,9 @@
     <title>Dashboard Guru</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         .pulse-hover:hover {
             animation: pulse 1.5s infinite;
@@ -202,6 +205,7 @@
 
                 <form action="<?= base_url('guru/update_profile') ?>" method="post" class="space-y-4">
                     <?= csrf_field() ?>
+                    
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
@@ -271,6 +275,30 @@
             }
         });
     </script>
+    <script>
+<?php if (session()->getFlashdata('success')): ?>
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: '<?= session()->getFlashdata('success') ?>',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+<?php elseif (session()->getFlashdata('error')): ?>
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: '<?= session()->getFlashdata('error') ?>',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+<?php endif; ?>
+</script>
+
 </body>
 
 </html>
