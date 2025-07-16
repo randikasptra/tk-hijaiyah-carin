@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title><?= $title ?? 'Admin Panel' ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tambahkan Alpine.js -->
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <!-- SweetAlert2 CSS & JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="flex bg-blue-50 min-h-screen">
@@ -17,6 +22,30 @@
             <?= $this->renderSection('content') ?>
         </main>
     </div>
-</body>
 
+ <script>
+    <?php if (session()->getFlashdata('success')): ?>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '<?= session()->getFlashdata('success') ?>',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    <?php elseif (session()->getFlashdata('error')): ?>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: '<?= session()->getFlashdata('error') ?>',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    <?php endif; ?>
+</script>
+
+</body>
 </html>

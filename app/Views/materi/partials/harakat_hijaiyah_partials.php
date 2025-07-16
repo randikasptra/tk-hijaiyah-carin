@@ -65,7 +65,7 @@
             <?php foreach ($hurufDasar as $huruf): ?>
                 <button onclick="tampilkanHarakat('<?= $huruf ?>')"
                     class="bg-white hover:bg-purple-100 p-2 rounded-xl shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 border-transparent hover:border-purple-300 group">
-                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.png') ?>"
+                    <img src="<?= base_url('assets/img/hijaiyah_huruf/' . $huruf . '.PNG') ?>"
                         alt="<?= $huruf ?>" class="w-20 h-20 object-contain mx-auto group-hover:rotate-6 transition-transform">
                 </button>
             <?php endforeach; ?>

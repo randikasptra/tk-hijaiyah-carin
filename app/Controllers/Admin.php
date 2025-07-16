@@ -36,15 +36,22 @@ class Admin extends BaseController
         $userModel = new UserModel();
 
         $data = [
-            'nama' => $this->request->getPost('nama'),
+            'name' => $this->request->getPost('name'),
             'email' => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'role' => $this->request->getPost('role')
         ];
 
-        $userModel->insert($data);
-
-        return redirect()->to('/admin/user')->with('success', 'User berhasil ditambahkan');
+        try {
+            $userModel->insert($data);
+            return redirect()->to('/admin/user')->with('success', 'User berhasil ditambahkan');
+        } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
+            if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                return redirect()->back()->withInput()->with('error', 'Email sudah digunakan. Tidak bisa menambahkan user.');
+            } else {
+                throw $e;
+            }
+        }
     }
 
     public function editUser($id)
@@ -65,7 +72,7 @@ class Admin extends BaseController
 
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'name' => 'required|min_length[3]',
+            'nama' => 'required|min_length[3]',
             'email' => 'required|valid_email',
             'role' => 'required|in_list[admin,guru,siswa]',
         ]);
@@ -73,11 +80,11 @@ class Admin extends BaseController
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()
                 ->withInput()
-                ->with('errors', $validation->getErrors());
+                ->with('error', implode('<br>', $validation->getErrors()));
         }
 
         $data = [
-            'name' => $this->request->getPost('name'),
+            'nama' => $this->request->getPost('nama'),
             'email' => $this->request->getPost('email'),
             'role' => $this->request->getPost('role'),
         ];
@@ -87,15 +94,23 @@ class Admin extends BaseController
             $data['password'] = password_hash($password, PASSWORD_DEFAULT);
         }
 
-        $userModel->update($id, $data);
-
-        return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui.');
+        try {
+            $userModel->update($id, $data);
+            return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui.');
+        } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memperbarui user.');
+        }
     }
-
 
     public function hapusUser($id)
     {
         $userModel = new UserModel();
+        $user = $userModel->find($id);
+
+        if (!$user) {
+            return redirect()->to('/admin/user')->with('error', 'User tidak ditemukan.');
+        }
+
         $userModel->delete($id);
 
         return redirect()->to('/admin/user')->with('success', 'User berhasil dihapus');
@@ -103,7 +118,7 @@ class Admin extends BaseController
 
     public function detailUser($id)
     {
-        $userModel = new \App\Models\UserModel();
+        $userModel = new UserModel();
         $user = $userModel->find($id);
 
         if (!$user) {
