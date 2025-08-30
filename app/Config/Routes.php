@@ -49,6 +49,7 @@ $routes->group('materi/game', ['filter' => 'role:admin,guru'], function($routes)
     $routes->post('level-harakat/(:num)', 'Game::checkLevelHarakat/$1');
     $routes->get('selesai', 'Game::selesai');
     $routes->get('spa-harakat', 'Game::spaHarakat');
+    $routes->get('spa-harakat-2', 'Game::spaHarakat2');
     
 });
 

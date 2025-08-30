@@ -144,6 +144,19 @@ class Game extends BaseController
 
         return view('materi/game/spa_harakat', ['soal' => $soal]);
     }
+   public function spaHarakat2()
+{
+    $soal = [
+        ['huruf' => 'Na', 'opsi' => ['Na', 'Ma', 'Ta','Ba','Kha'], 'sound' => 'game-1.mp3', 'bg' => 'game-1.png'],
+        ['huruf' => 'Ba', 'opsi' => ['Ba', 'Tsa', 'Kha','Ta','Na','Ma'], 'sound' => 'game-2.mp3', 'bg' => 'game-2.png'],
+        ['huruf' => 'Dza', 'opsi' => ['Dza', 'Ba', 'Ta','Kho','Ma'], 'sound' => 'game-3.mp3', 'bg' => 'game-3.png'],
+        ['huruf' => 'Ro', 'opsi' => ['Ro', 'Gha', 'Dza'], 'sound' => 'game-4.mp3', 'bg' => 'game-4.png'],
+        ['huruf' => 'Kha', 'opsi' => ['Kha', 'Kho', 'Ha'], 'sound' => 'game-5.mp3', 'bg' => 'game-5.png'],
+    ];
+
+    return view('materi/game/spa_harakat_2', ['soal' => $soal]);
+}
+
 
 
     public function checkLevelHarakat($step = 0)

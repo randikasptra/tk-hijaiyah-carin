@@ -212,13 +212,22 @@
         <h1>🎮 Game Hijaiyah</h1>
 
         <div class="levels-container">
-          
 
-            <a href="<?= base_url('materi/game/spa-harakat') ?>"
-                class="level-card bg-gradient-to-r from-blue-500 to-cyan-400">
-                🌟 Tebak Harakat Hijaiyah
-            </a>
+    <!-- Level 1 -->
+<a href="<?= base_url('materi/game/spa-harakat') ?>"
+    class="level-card bg-gradient-to-r from-blue-500 to-cyan-400">
+    🎯 Level 1: Tebak Harakat Hijaiyah
+</a>
+
+<!-- Level 2 -->
+<a href="<?= base_url('materi/game/spa-harakat-2') ?>"
+    class="level-card bg-gradient-to-r from-green-500 to-emerald-400">
+    🚀 Level 2: Tebak Huruf Hijaiyah
+</a>
+
+    
         </div>
+
 
         <a href="<?= base_url('materi/home') ?>" class="back-dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon-arrow-left" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
