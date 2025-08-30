@@ -208,35 +208,48 @@
         "></div>
     <?php endfor; ?>
 
-    <div class="main-container">
-        <h1>🎮 Game Hijaiyah</h1>
+    <div class="main-container text-center">
+        <h1 class="flex items-center justify-center gap-2 text-3xl font-bold text-black">
+            <!-- 🎮 diganti icon game controller -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6h6a7 7 0 110 14H9a7 7 0 110-14z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01" />
+            </svg>
+            Game Hijaiyah
+        </h1>
 
-        <div class="levels-container">
+        <div class="levels-container mt-6">
 
-    <!-- Level 1 -->
-<a href="<?= base_url('materi/game/spa-harakat') ?>"
-    class="level-card bg-gradient-to-r from-blue-500 to-cyan-400">
-    🎯 Level 1: Tebak Harakat Hijaiyah
-</a>
+            <!-- Level 1 -->
+            <a href="<?= base_url('materi/game/spa-harakat') ?>"
+               class="level-card bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center gap-2">
+                <!-- 🎯 diganti target icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3" />
+                </svg>
+                Level 1: Tebak Huruf Hijaiyah
+            </a>
 
-<!-- Level 2 -->
-<a href="<?= base_url('materi/game/spa-harakat-2') ?>"
-    class="level-card bg-gradient-to-r from-green-500 to-emerald-400">
-    🚀 Level 2: Tebak Huruf Hijaiyah
-</a>
+            <!-- Level 2 -->
+            <a href="<?= base_url('materi/game/spa-harakat-2') ?>"
+               class="level-card bg-gradient-to-r from-green-500 to-emerald-400 flex items-center gap-2">
+                <!-- 🚀 diganti rocket icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7M12 3v2m0 14v2m8-8h2M2 12h2" />
+                </svg>
+                Level 2: Tebak Huruf Hijaiyah
+            </a>
 
-    
         </div>
 
-
-        <a href="<?= base_url('materi/home') ?>" class="back-dashboard">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon-arrow-left" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <a href="<?= base_url('materi/home') ?>" class="back-dashboard flex items-center gap-2 mt-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-arrow-left w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             Kembali ke Dashboard
         </a>
-
-
     </div>
 </div>
+
 

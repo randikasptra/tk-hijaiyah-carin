@@ -154,6 +154,8 @@ class Game extends BaseController
         ['huruf' => 'Kha', 'opsi' => ['Kha', 'Kho', 'Ha'], 'sound' => 'game-5.mp3', 'bg' => 'game-5.png'],
     ];
 
+    shuffle($soal);
+
     return view('materi/game/spa_harakat_2', ['soal' => $soal]);
 }
 
