@@ -67,40 +67,44 @@ class Admin extends BaseController
     }
 
     public function updateUser($id)
-    {
-        $userModel = new UserModel();
+{
+    $userModel = new UserModel();
 
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'nama' => 'required|min_length[3]',
-            'email' => 'required|valid_email',
-            'role' => 'required|in_list[admin,guru,siswa]',
-        ]);
+    // Validation
+    $validation = \Config\Services::validation();
+    $validation->setRules([
+        'name'  => 'required|min_length[3]',
+        'email' => 'required|valid_email',
+        'role'  => 'required|in_list[admin,guru,siswa]',
+    ]);
 
-        if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', implode('<br>', $validation->getErrors()));
-        }
-
-        $data = [
-            'nama' => $this->request->getPost('nama'),
-            'email' => $this->request->getPost('email'),
-            'role' => $this->request->getPost('role'),
-        ];
-
-        $password = $this->request->getPost('password');
-        if (!empty($password)) {
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
-        }
-
-        try {
-            $userModel->update($id, $data);
-            return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui.');
-        } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memperbarui user.');
-        }
+    if (!$validation->withRequest($this->request)->run()) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', implode('<br>', $validation->getErrors()));
     }
+
+    // Ambil data dari form
+    $data = [
+        'name'  => $this->request->getPost('name'),
+        'email' => $this->request->getPost('email'),
+        'role'  => $this->request->getPost('role'),
+    ];
+
+    // Update password jika ada input baru
+    $password = $this->request->getPost('password');
+    if (!empty($password)) {
+        $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    try {
+        $userModel->update($id, $data);
+        return redirect()->to('/admin/user')->with('success', 'User berhasil diperbarui.');
+    } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
+        return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat memperbarui user.');
+    }
+}
+
 
     public function hapusUser($id)
     {
