@@ -59,7 +59,7 @@
     <div class="flex flex-col justify-between h-full px-4 pt-4 pb-4 relative">
         <!-- Judul -->
         <h1 class="text-3xl md:text-4xl font-extrabold text-center text-purple-800 drop-shadow mb-4">
-            Mengenal Huruf Hijaiyah
+            Mengenal Huruf Hijaiyah 
         </h1>
 
         <!-- Grid Huruf -->
