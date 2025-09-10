@@ -47,11 +47,21 @@ $hurufHijaiyah = [
             <div class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-5 p-6 rounded-3xl shadow-2xl overflow-y-auto bg-white/60 backdrop-blur-md max-h-[70vh] mx-auto w-full max-w-[90vw] border border-white/30"
                 style="direction: rtl;">
                 <?php foreach ($hurufHijaiyah as $index => $h): ?>
-                    <div class="card bg-white/90 hover:bg-white rounded-xl p-4 shadow-lg text-center cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-2 hover:border-purple-300 transform"
-                        onclick="showDescription(<?= $index ?>, '<?= base_url($h['suara']) ?>')">
-                        <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>"
-                            class="w-20 h-20 object-contain mx-auto mb-3">
-                        <p class="text-purple-900 font-bold text-xl tracking-wide"><?= esc($h['nama']) ?>🔊</p>
+                    <div class="card bg-white/90 hover:bg-white rounded-xl p-4 shadow-lg text-center relative cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-2 hover:border-purple-300 transform">
+                        <!-- Tombol Info -->
+                        <button onclick="showDescription(<?= $index ?>)"
+                            class="absolute top-2 right-2 bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-purple-700 transition-all duration-200"
+                            title="Info Huruf">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 3a9 9 0 100 18 9 9 0 000-18z" />
+                            </svg>
+                        </button>
+                        <!-- Konten Kartu -->
+                        <div onclick="playSound('<?= base_url($h['suara']) ?>')">
+                            <img src="<?= base_url($h['gambar']) ?>" alt="<?= $h['nama'] ?>"
+                                class="w-20 h-20 object-contain mx-auto mb-3">
+                            <p class="text-purple-900 font-bold text-xl tracking-wide"><?= esc($h['nama']) ?>🔊</p>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -112,20 +122,15 @@ $hurufHijaiyah = [
         currentAudio.play().catch(err => console.warn("Gagal memutar suara:", err));
     }
 
-    function showDescription(index, soundUrl) {
+    function showDescription(index) {
         const huruf = hurufData[index];
         document.getElementById('modalTitle').textContent = `Huruf ${huruf.nama}`;
         document.getElementById('modalDescription').textContent = huruf.deskripsi;
         document.getElementById('descriptionModal').classList.remove('hidden');
-        playSound(soundUrl);
     }
 
     function closeModal() {
         document.getElementById('descriptionModal').classList.add('hidden');
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
     }
 
     // Auto play audio sambutan saat halaman dimuat
